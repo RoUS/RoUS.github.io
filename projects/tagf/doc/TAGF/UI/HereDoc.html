@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: TAGF::UI::HereDoc
+  
+    &mdash; Text Adventure Framework (TAF) Gem
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "TAGF::UI::HereDoc";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (H)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../UI.html" title="TAGF::UI (module)">UI</a></span></span>
+     &raquo; 
+    <span class="title">HereDoc</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: TAGF::UI::HereDoc
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">TAGF::UI::HereDoc</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/tagf/ui.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Record the paticulars of a here-doc.  Here-docs are input lines
+designed to be processed as a group.  They have a basic format
+as follows (characters and words in brackets
+(<strong><code>[]</code></strong>) are optional):</p>
+
+<pre class="code ruby"><code class="ruby"> [&lt;em&gt;prefix&lt;/em&gt;]&lt;&lt;[-]&lt;em&gt;delimiter&lt;/em&gt;
+ [&lt;em&gt;text-line&lt;/em&gt;...]
+ &lt;em&gt;delimiter&lt;/em&gt;
+</code></pre>
+
+<p>As an example:</p>
+
+<pre class="code ruby"><code class="ruby"> <span class='id identifier rubyid_two_liner'>two_liner</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;-EOF</span>
+<span class='tstring_content'>   You&#39;re at the end of a road.
+   There is a small shed here.
+</span><span class='heredoc_end'>   EOF
+</span></code></pre>
+
+<dl>
+<dt>* <em>prefix</em></dt>
+<dd><p>Everything, including whitespace, preceding the <code>&lt;&lt;</code>
+introducer.  In the example, this would be</p>
+
+<p>"<code>two_liner =</code>"</p>
+
+<p>Notice the inclusion of the spaces.</p></dd>
+<dt>* Optional hyphen</dt>
+<dd>The presence of the hyphen (dash) immediately preceding the
+delimiter signals that when the delimiter is encountered, it
+<em>may</em> be preceded by irrelevant whitespace, which is
+to be stripped and ignored.  This is intended to improve
+readability by humans (not software).</dd>
+<dt>* <em>delimiter</em></dt>
+<dd>A 'word' which, when read on a line by itself, signals the
+end of the here-doc content.  The delimiter is at least one
+character long, is case-sensitive, and may be composed of
+alphanumerics and the underscore (<code>_</code>) character.  Trailing
+whitespace is ignored.</dd>
+<dt>* <em>text-line</em></dt>
+<dd>Lines of text comprising the actual value of the here-doc.</dd>
+</dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="HEREDOC_RE-constant" class="">HEREDOC_RE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Regular expression describing the header of a 'here-doc'.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>^
+ &lt;&lt;(-)?
+ ([&#39;&quot;])?
+ ([[:alnum:]][-_[:alnum:]]*)
+ ([&#39;&quot;])?
+ $
+</span><span class='regexp_end'>!x</span></span></pre></dd>
+      
+        <dt id="HEREDOC_FIELDS-constant" class="">HEREDOC_FIELDS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Names (as symbols) of all the attributes defined by this
+class.  Used to collect all the names/values into a hash.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+  </span><span class='tstring_content'>intro_line</span><span class='words_sep'>
+  </span><span class='tstring_content'>prefix</span><span class='words_sep'>
+  </span><span class='tstring_content'>delimiter</span><span class='words_sep'>
+  </span><span class='tstring_content'>delimiter_re</span><span class='words_sep'>
+  </span><span class='tstring_content'>raw</span><span class='words_sep'>
+  </span><span class='tstring_content'>lines</span><span class='words_sep'>
+</span><span class='tstring_end'>]</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delimiter-instance_method" title="#delimiter (instance method)">#<strong>delimiter</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The here-doc termination signal, called the delimiter, obtained from the 'word' following the <code>"&lt;&lt;"</code> here-doc signature.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delimiter_re-instance_method" title="#delimiter_re (instance method)">#<strong>delimiter_re</strong>  &#x21d2; Regexp </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The regular expression derived from the here-doc introductory line that will exactly match the termination line syntax.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#intro_line-instance_method" title="#intro_line (instance method)">#<strong>intro_line</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The complete first line of the here-doc block, containing the here-doc delimiter signature.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lines-instance_method" title="#lines (instance method)">#<strong>lines</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The text content of the here-doc as an array of strings built by splitting the raw text on newline (<code>"\n"</code>) characters.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prefix-instance_method" title="#prefix (instance method)">#<strong>prefix</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Everthing on the here-doc introductory line up to, but not including, the <code>"&lt;&lt;"</code> starting the delimiter.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raw-instance_method" title="#raw (instance method)">#<strong>raw</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The raw text content of the here-doc as a single string, including any embedded newlines or other special characters.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(**kwargs)  &#x21d2; HereDoc </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Constructor for HereDoc class.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(**kwargs)  &#x21d2; <tt><span class='object_link'><a href="" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Constructor for HereDoc class.  Set any instance variables
+whose names appear in <code>kwargs</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>({})</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:intro_line</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:prefix</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:delimiter</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:delimiter_re</span>
+          <span class="type">(<tt>Regexp</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:raw</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:lines</span>
+          <span class="type">(<tt>Array&lt;String&gt;</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+725
+726
+727
+728
+729
+730
+731
+732</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 725</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="#HEREDOC_FIELDS-constant" title="TAGF::UI::HereDoc::HEREDOC_FIELDS (constant)">HEREDOC_FIELDS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_kw'>kw</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_kw'>kw</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_setter'>setter</span>	<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s=</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_kw'>kw</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_setter'>setter</span><span class='comma'>,</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='id identifier rubyid_kw'>kw</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="delimiter=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="delimiter-instance_method">
+  
+    #<strong>delimiter</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The here-doc termination signal, called the delimiter,
+obtained from the 'word' following the <code>"&lt;&lt;"</code> here-doc
+signature.  Any leading dash ("<code>-</code>") or surrounding quotation
+marks are not included.  For example, for a here-doc starting
+with</p>
+
+<pre class="code ruby"><code class="ruby">   primitive = &lt;&lt;TEXTBLOCK
+</code></pre>
+
+<p>the #delimiter attribute would contain <code>"TEXTBLOCK"</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the word following the <code>"&lt;&lt;"</code> on the here-doc introductory
+line, minus any quotation marks or other special indicators</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#intro_line-instance_method" title="TAGF::UI::HereDoc#intro_line (method)">#intro_line</a></span></li>
+    
+      <li><span class='object_link'><a href="#prefix-instance_method" title="TAGF::UI::HereDoc#prefix (method)">#prefix</a></span></li>
+    
+      <li><span class='object_link'><a href="#delimiter_re-instance_method" title="TAGF::UI::HereDoc#delimiter_re (method)">#delimiter_re</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+665
+666
+667</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 665</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delimiter'>delimiter</span>
+  <span class='ivar'>@delimiter</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="delimiter_re=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="delimiter_re-instance_method">
+  
+    #<strong>delimiter_re</strong>  &#x21d2; <tt>Regexp</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The regular expression derived from the here-doc introductory
+line that will exactly match the termination line syntax.  For
+example, for a here-doc starting with</p>
+
+<pre class="code ruby"><code class="ruby">   primitive = &lt;&lt;TEXTBLOCK
+</code></pre>
+
+<p>the #delimiter_re attribute would contain the equivalent of
+<code>%r[^TEXTBLOCK$]</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Regexp</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a regular expression matching the complete line syntax that
+terminates the here-doc</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#delimiter-instance_method" title="TAGF::UI::HereDoc#delimiter (method)">#delimiter</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+682
+683
+684</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 682</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delimiter_re'>delimiter_re</span>
+  <span class='ivar'>@delimiter_re</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="intro_line=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="intro_line-instance_method">
+  
+    #<strong>intro_line</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'><p>Semantics of whitespace stripping of here-doc text?</p>
+</div>
+  </div>
+
+<p>The complete first line of the here-doc block, containing the
+here-doc delimiter signature.  For example, for a here-doc
+starting with</p>
+
+<pre class="code ruby"><code class="ruby">   primitive = &lt;&lt;TEXTBLOCK
+</code></pre>
+
+<p>the #intro_line attribute would contain <code>"primitive =
+&lt;&lt;TEXTBLOCK"</code>.  Possibly with leading and/or trailing
+whitespace stripped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the complete line introducing the here-doc</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#prefix-instance_method" title="TAGF::UI::HereDoc#prefix (method)">#prefix</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip-instance_method" title="TAGF::UI::Controls#strip (method)">Controls#strip</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip_leading-instance_method" title="TAGF::UI::Controls#strip_leading (method)">Controls#strip_leading</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip_trailing-instance_method" title="TAGF::UI::Controls#strip_trailing (method)">Controls#strip_trailing</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+622
+623
+624</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 622</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_intro_line'>intro_line</span>
+  <span class='ivar'>@intro_line</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="lines=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="lines-instance_method">
+  
+    #<strong>lines</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'><p>Semantics of whitespace stripping of here-doc text?</p>
+</div>
+  </div>
+
+<p>The text content of the here-doc as an array of strings built
+by splitting the raw text on newline (<code>"\n"</code>) characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the complete text of the here-doc as an array of strings,
+one <em>per</em> line</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#raw-instance_method" title="TAGF::UI::HereDoc#raw (method)">#raw</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+703
+704
+705</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 703</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_lines'>lines</span>
+  <span class='ivar'>@lines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="prefix=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="prefix-instance_method">
+  
+    #<strong>prefix</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'><p>Semantics of whitespace stripping of here-doc text?</p>
+</div>
+  </div>
+
+<p>Everthing on the here-doc introductory line up to, but not
+including, the <code>"&lt;&lt;"</code> starting the delimiter.  For example,
+for a here-doc starting with</p>
+
+<pre class="code ruby"><code class="ruby">   primitive = &lt;&lt;TEXTBLOCK
+</code></pre>
+
+<p>the #prefix attribute would contain <code>"primitive = "</code>.
+Possibly with leading whitespace stripped.  Whitespace
+preceding the <code>"&lt;&lt;"</code> is <em>not</em> stripped.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>all the text on the line introducing the here-doc up to, but
+not including, the <code>"&lt;&lt;"</code></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#intro_line-instance_method" title="TAGF::UI::HereDoc#intro_line (method)">#intro_line</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip-instance_method" title="TAGF::UI::Controls#strip (method)">Controls#strip</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip_leading-instance_method" title="TAGF::UI::Controls#strip_leading (method)">Controls#strip_leading</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip_trailing-instance_method" title="TAGF::UI::Controls#strip_trailing (method)">Controls#strip_trailing</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+645
+646
+647</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 645</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_prefix'>prefix</span>
+  <span class='ivar'>@prefix</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="raw=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="raw-instance_method">
+  
+    #<strong>raw</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'><p>Semantics of whitespace stripping of here-doc text?</p>
+</div>
+  </div>
+
+<p>The raw text content of the here-doc as a single string,
+including any embedded newlines or other special characters.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the complete text of the here-doc as a single string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#lines-instance_method" title="TAGF::UI::HereDoc#lines (method)">#lines</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+692
+693
+694</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 692</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_raw'>raw</span>
+  <span class='ivar'>@raw</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+
+      <div id="footer">
+  Generated on Sat Mar  2 12:52:26 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.0.5).
+</div>
+
+    </div>
+  </body>
+</html>

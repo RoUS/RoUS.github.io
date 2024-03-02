@@ -1,0 +1,2815 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: TAGF::Mixin::Events
+  
+    &mdash; Text Adventure Framework (TAF) Gem
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "TAGF::Mixin::Events";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (E)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Mixin.html" title="TAGF::Mixin (module)">Mixin</a></span></span>
+     &raquo; 
+    <span class="title">Events</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: TAGF::Mixin::Events
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="DTypes.html" title="TAGF::Mixin::DTypes (module)">DTypes</a></span>, <span class='object_link'><a href="UniversalMethods.html" title="TAGF::Mixin::UniversalMethods (module)">UniversalMethods</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/tagf/mixin/events.rb</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="EventList-constant" class="">EventList =
+          <div class="docstring">
+  <div class="discussion">
+    <p>List of all supported events and when objects are notified of
+them.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>EventTurnBegin:</span>		<span class='symbol'>:turn_begin</span><span class='comma'>,</span>
+  <span class='label'>EventTurnEnd:</span>		<span class='symbol'>:turn_end</span><span class='comma'>,</span>
+  <span class='label'>EventDestruction:</span>	<span class='symbol'>:turn_end</span><span class='comma'>,</span>
+  <span class='label'>EventDeath:</span>		<span class='symbol'>:turn_end</span><span class='comma'>,</span>
+  <span class='label'>EventOpen:</span>		<span class='symbol'>:immediate</span><span class='comma'>,</span>
+  <span class='label'>EventClose:</span>		<span class='symbol'>:immediate</span><span class='comma'>,</span>
+  <span class='label'>EventLight:</span>		<span class='symbol'>:turn_begin</span><span class='comma'>,</span>
+  <span class='label'>EventBrighten:</span>		<span class='symbol'>:turn_end</span><span class='comma'>,</span>
+  <span class='label'>EventDark:</span>		<span class='symbol'>:turn_end</span><span class='comma'>,</span>
+  <span class='label'>EventDim:</span>		<span class='symbol'>:turn_end</span><span class='comma'>,</span>
+  <span class='label'>EventAttacked:</span>		<span class='symbol'>:turn_begin</span><span class='comma'>,</span>
+  <span class='label'>EventMove:</span>		<span class='symbol'>:turn_begin</span><span class='comma'>,</span>
+  <span class='label'>EventAttack:</span>		<span class='symbol'>:turn_end</span><span class='comma'>,</span>
+  <span class='label'>EventTaken:</span>		<span class='symbol'>:turn_begin</span><span class='comma'>,</span>
+  <span class='label'>EventDropped:</span>		<span class='symbol'>:turn_begin</span><span class='comma'>,</span>
+<span class='rbrace'>}</span></pre></dd>
+      
+        <dt id="Loadable_Fields-constant" class="">Loadable_Fields =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Fields specific to this class or module that are loadable from
+YAML.  Facets which are calculated at runtime or otherwise derived
+do not appear in this constant.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbracket'>[</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>events_heard</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>event_queue</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+<span class='rbracket'>]</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#event_queue-instance_method" title="#event_queue (instance method)">#<strong>event_queue</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute event_queue.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#events_heard-instance_method" title="#events_heard (instance method)">#<strong>events_heard</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the value of attribute events_heard.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#klassname-instance_method" title="#klassname (instance method)">#<strong>klassname</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#klassname-instance_method" title="TAGF::Mixin::UniversalMethods#klassname (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the receiver's classname as a string, with all namespacing elements removed so it's just the unqualified portion.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#_inivaluate_args-instance_method" title="#_inivaluate_args (instance method)">#<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; Hash{Symbol=&gt;Any} </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#_inivaluate_args-instance_method" title="TAGF::Mixin::UniversalMethods#_inivaluate_args (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of <em>keysym:inival</em> tuples built from merging the <em>kwargs</em> hash onto the one constructed from the <em>args</em> array and the <em>default</em> value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#decompose_attrib-instance_method" title="#decompose_attrib (instance method)">#<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; OpenStruct </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#decompose_attrib-instance_method" title="TAGF::Mixin::UniversalMethods#decompose_attrib (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a symbolic attribute name and potentially a default value, return a structure containing fields for the various things needed to define methods dealing with it (String name, instance-variable symbol, attribute with suffices like <code>!</code>, <code>?</code>, <code>=</code>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#game_options%3F-instance_method" title="#game_options? (instance method)">#<strong>game_options?</strong>(option, *args)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#game_options%3F-instance_method" title="TAGF::Mixin::UniversalMethods#game_options? (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check to see whether one or more game options are currently enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_game_element%3F-instance_method" title="#is_game_element? (instance method)">#<strong>is_game_element?</strong>(target)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#is_game_element%3F-instance_method" title="TAGF::Mixin::UniversalMethods#is_game_element? (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return <code>true</code> if the given object is a game element — that is, its eigenclass has included (or been extended by) the TAGF::Mixin::Element module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loadable_fields-instance_method" title="#loadable_fields (instance method)">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+      (also: #abstracted_fields)
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#loadable_fields-instance_method" title="TAGF::Mixin::UniversalMethods#loadable_fields (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of field names built from concatenating values of the constant from the receiver class and all of its ancestors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onAttack-instance_method" title="#onAttack (instance method)">#<strong>onAttack</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onAttacked-instance_method" title="#onAttacked (instance method)">#<strong>onAttacked</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onBrighten-instance_method" title="#onBrighten (instance method)">#<strong>onBrighten</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onClose-instance_method" title="#onClose (instance method)">#<strong>onClose</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onDark-instance_method" title="#onDark (instance method)">#<strong>onDark</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onDeath-instance_method" title="#onDeath (instance method)">#<strong>onDeath</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onDestruction-instance_method" title="#onDestruction (instance method)">#<strong>onDestruction</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onDim-instance_method" title="#onDim (instance method)">#<strong>onDim</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onDropped-instance_method" title="#onDropped (instance method)">#<strong>onDropped</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onLight-instance_method" title="#onLight (instance method)">#<strong>onLight</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onMove-instance_method" title="#onMove (instance method)">#<strong>onMove</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onOpen-instance_method" title="#onOpen (instance method)">#<strong>onOpen</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onTaken-instance_method" title="#onTaken (instance method)">#<strong>onTaken</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onTurnBegin-instance_method" title="#onTurnBegin (instance method)">#<strong>onTurnBegin</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#onTurnEnd-instance_method" title="#onTurnEnd (instance method)">#<strong>onTurnEnd</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="abstract note title">abstract</span>
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pluralise-instance_method" title="#pluralise (instance method)">#<strong>pluralise</strong>(word, number = 1)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#pluralise-instance_method" title="TAGF::Mixin::UniversalMethods#pluralise (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a word (presumably a singular noun) and a count, return the plural of the word if the count justifies it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raise_exception-instance_method" title="#raise_exception (instance method)">#<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#raise_exception-instance_method" title="TAGF::Mixin::UniversalMethods#raise_exception (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Either uses a passed exception or creates a new exception object according to the <code>exc_object</code> parameter, edits the backtrace to remove the appropriate number of stack frames, and raises it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_evlistener-instance_method" title="#register_evlistener (instance method)">#<strong>register_evlistener</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#symbolise_kwargs-instance_method" title="#symbolise_kwargs (instance method)">#<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; Hash&lt;Symbol=&gt;Any&gt; </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#symbolise_kwargs-instance_method" title="TAGF::Mixin::UniversalMethods#symbolise_kwargs (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translate a hash into one with all-symbolic keys, according to standard <code>**kwargs</code> semantics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#truthify-instance_method" title="#truthify (instance method)">#<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="UniversalMethods.html#truthify-instance_method" title="TAGF::Mixin::UniversalMethods#truthify (method)">UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert a value (string, numeric, any kind of object) into a Boolean.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="event_queue-instance_method">
+  
+    #<strong>event_queue</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute event_queue.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_event_queue'>event_queue</span>
+  <span class='ivar'>@event_queue</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="events_heard=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="events_heard-instance_method">
+  
+    #<strong>events_heard</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the value of attribute events_heard.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_events_heard'>events_heard</span>
+  <span class='ivar'>@events_heard</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="klassname-instance_method">
+  
+    #<strong>klassname</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#klassname-instance_method" title="TAGF::Mixin::UniversalMethods#klassname (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the receiver's classname as a string, with all
+namespacing elements removed so it's just the unqualified
+portion.  <em>E.g.</em>, an invocation by an object of class
+<code>TAGF::Exceptions::DummyError</code> would return <code>DummyError</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_inivaluate_args-instance_method">
+  
+    #<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; <tt>Hash{Symbol=&gt;Any}</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#_inivaluate_args-instance_method" title="TAGF::Mixin::UniversalMethods#_inivaluate_args (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(nil)
+Whatever default value should be supplied for attributes
+listed in the <code>args</code> array.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) array of attribute identifiers.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) hash of <em>keysym:inival</em> tuples.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>inival</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>allows an attribute declarator to perform validity checks or
+transformations on the initial values (such as ensuring they
+are all of a particular class (<em>e.g.</em>, <code>TrueClass</code> or
+<code>FalseClass</code> for a Boolean attribute).</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>inival</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>each <em>inival</em> in turn.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Returns:</p>
+<ul class="yieldreturn">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever tranformation, if any, the block performs on the
+<em>inival</em>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decompose_attrib-instance_method">
+  
+    #<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; <tt>OpenStruct</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#decompose_attrib-instance_method" title="TAGF::Mixin::UniversalMethods#decompose_attrib (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Given a symbolic attribute name and potentially a default
+value, return a structure containing fields for the various
+things needed to define methods dealing with it
+(String name, instance-variable symbol, attribute with
+suffices like <code>!</code>, <code>?</code>, <code>=</code>).  Any non-alphanumeric,
+non-underscore characters are silently stripped before the
+name is processed.</p>
+
+<p>See the return value for details of the returned structure.</p>
+
+<pre class="code ruby"><code class="ruby">    default:    The default value from this method invocation;
+                default `nil`
+    str:        The base attribute name as a String
+    attrib:     The base attribute name as a Symbol
+    getter:     (Same as :attrib field)
+    setter:     The symbolic attribute name with a `=` suffix
+    query:      The symbolic attribute name with a `?` suffix
+    bang:       The symbolic attribute name with a `!` suffix
+    ivar:       The symbolic name for the corresponding
+                instance variable (_e.g._, `:@&lt;attrib_p&gt;`)
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attrib_p</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>OpenStruct</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Fields in the structure are:</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="game_options?-instance_method">
+  
+    #<strong>game_options?</strong>(option, *args)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#game_options%3F-instance_method" title="TAGF::Mixin::UniversalMethods#game_options? (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check to see whether one or more game options are currently
+enabled.  If any arguments aren't recognised as game options,
+a warning is sent to <code>stderr</code> and that argument is ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>option</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if <strong>all</strong> of the requested options are currently
+enabled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_game_element?-instance_method">
+  
+    #<strong>is_game_element?</strong>(target)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#is_game_element%3F-instance_method" title="TAGF::Mixin::UniversalMethods#is_game_element? (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return <code>true</code> if the given object is a game element — that is,
+its eigenclass has included (or been extended by) the
+TAGF::Mixin::Element module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loadable_fields-instance_method">
+  
+    
+      <span class="overload">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+      <span class="overload">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='abstracted_fields-instance_method'>abstracted_fields</span></span>
+    </span>
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#loadable_fields-instance_method" title="TAGF::Mixin::UniversalMethods#loadable_fields (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Look at the constant <code>Loadable_Fields</code> for the receiver
+class and all of its ancestors, and return an array of all
+unique values therein.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Same as #loadable_fields save that it uses the
+<code>Abstracted_Fields</code> constants instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+  </ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rcvr</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(self)
+Class (or object whose class should be used) for which the
+list of fields should be derived.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onAttack-instance_method">
+  
+    #<strong>onAttack</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+139
+140
+141</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 139</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onAttack'>onAttack</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onAttacked-instance_method">
+  
+    #<strong>onAttacked</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+144
+145
+146</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 144</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onAttacked'>onAttacked</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onBrighten-instance_method">
+  
+    #<strong>onBrighten</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 124</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onBrighten'>onBrighten</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onClose-instance_method">
+  
+    #<strong>onClose</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onClose'>onClose</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onDark-instance_method">
+  
+    #<strong>onDark</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onDark'>onDark</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onDeath-instance_method">
+  
+    #<strong>onDeath</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onDeath'>onDeath</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onDestruction-instance_method">
+  
+    #<strong>onDestruction</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onDestruction'>onDestruction</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onDim-instance_method">
+  
+    #<strong>onDim</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+134
+135
+136</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 134</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onDim'>onDim</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onDropped-instance_method">
+  
+    #<strong>onDropped</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+159
+160
+161</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 159</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onDropped'>onDropped</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onLight-instance_method">
+  
+    #<strong>onLight</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 119</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onLight'>onLight</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onMove-instance_method">
+  
+    #<strong>onMove</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onMove'>onMove</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onOpen-instance_method">
+  
+    #<strong>onOpen</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onOpen'>onOpen</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onTaken-instance_method">
+  
+    #<strong>onTaken</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 154</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onTaken'>onTaken</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onTurnBegin-instance_method">
+  
+    #<strong>onTurnBegin</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onTurnBegin'>onTurnBegin</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="onTurnEnd-instance_method">
+  
+    #<strong>onTurnEnd</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <div class="note abstract">
+  <strong>This method is abstract.</strong>
+  <div class='inline'>
+</div>
+</div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_onTurnEnd'>onTurnEnd</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pluralise-instance_method">
+  
+    #<strong>pluralise</strong>(word, number = 1)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#pluralise-instance_method" title="TAGF::Mixin::UniversalMethods#pluralise (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>At the moment, only English (<code>en</code>) words are supported.</p>
+</div>
+  </div>
+
+<p>Given a word (presumably a singular noun) and a count, return
+the plural of the word if the count justifies it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>word</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>either the original word, or the deduced plural if the
+<code>number</code> argument was an integer 1.  (Floats <em>always</em>
+use plurals, even if they're <code>1.000</code>.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="raise_exception-instance_method">
+  
+    #<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#raise_exception-instance_method" title="TAGF::Mixin::UniversalMethods#raise_exception (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p><p>Either uses a passed exception or creates a new exception
+object according to the <code>exc_object</code> parameter, edits the
+backtrace to remove the appropriate number of stack frames,
+and raises it.</p>
+
+<p>Acceptable values for <code>exc_object</code> are any of the following:</p>
+
+<dl>
+<dt>1. a string</dt>
+<dd>a new <code>RuntimeError</code> exception is created from the
+ string.  <code>args</code> is ignored.</dd>
+<dt>2. an exception object</dt>
+<dd>the object is raised as is.  <code>args</code> is ignored.</dd>
+<dt>3. an exception class</dt>
+<dd>a new exception object is created from this constructor.
+ <code>args</code> is passed to the constructor, and <code>kwargs</code> as well
+ if <code>exc_object</code> is a descendant of
+ <span class='object_link'><a href="../Exceptions/ErrorBase.html" title="TAGF::Exceptions::ErrorBase (class)">Exceptions::ErrorBase</a></span>.</dd>
+<dt>4. a callable object that returns one of the above</dt>
+<dd>anything that responds to the <code>:call</code> method falls into
+ this category.  It will be invoked with <code>.call(*args)</code>.
+ <code>kwargs</code> isn't passed.</dd>
+</dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>exc_object</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Class</tt>, <tt>Exception</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string (converted to a <code>RuntimeError</code> exception), an
+exception class, an actual exception, or a <code>Proc</code> that
+returns one of the above.  See the method description.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of arguments to pass to any exception constructor
+invoked.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of keyword arguments to pass to the constructor,
+possibly with the <code>:levels</code> keyword which will be consumed
+by this method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:levels</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>1</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>The number of stack frames to pop off the backtrace.  The
+default is 1, meaning that the caller's caller will appear
+to be the location raising the exception.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/NotExceptional.html" title="TAGF::Exceptions::NotExceptional (class)">TAGF::Exceptions::NotExceptional</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>NotExceptional</code> exception is if the argument wasn't a
+string, an exception instance, an exception class, or a proc
+that (eventually) returns an exception class or instance.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever valid exception was derived from the arguments.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="register_evlistener-instance_method">
+  
+    #<strong>register_evlistener</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Arguments to pass to the listener in addition to the event
+in question.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:events</span>
+          <span class="type">(<tt>Array&lt;Symbol&gt;</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>List of events for which this listener is being registered.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/events.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_register_evlistener'>register_evlistener</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_evlist'>evlist</span>		<span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:events</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_evlist'>evlist</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='comma'>,</span>
+                    <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s() requires an :events </span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span>
+                           <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>keyword argument</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                           <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="symbolise_kwargs-instance_method">
+  
+    #<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; <tt>Hash&lt;Symbol=&gt;Any&gt;</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#symbolise_kwargs-instance_method" title="TAGF::Mixin::UniversalMethods#symbolise_kwargs (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translate a hash into one with all-symbolic keys, according to
+standard <code>**kwargs</code> semantics.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol,String=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a copy of the <code>kwargs</code> argument with all keys converted to
+symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RuntimeError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><tt>"symbolise_kwargs kwargs keys must be Symbols or
+Strings: <em>classname</em>:<em>key</em>"</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="truthify-instance_method">
+  
+    #<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="UniversalMethods.html#truthify-instance_method" title="TAGF::Mixin::UniversalMethods#truthify (method)">UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert a value (string, numeric, any kind of object) into a
+Boolean.  This varies slightly from normal Ruby semantics in
+that an integer 0 is considered <code>false</code> whereas normal Ruby
+interpretation would consider it <code>true</code>.</p>
+
+<p>Any value which isn't represented in the list of truthy values
+is considered <code>false</code>.</p>
+
+<p>The default list of truthy values can be augmented or replaced
+by using the keyword arguments <code>:true_values</code> and <code>:replace</code>.
+See the option descriptions below.</p>
+
+<p>More involved checking can be performed by supplying a proc
+(which is what the default implementation uses).  This module
+supplies some possibly-useful string and Regexp constants.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>testvalue</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>value to evaluate for truthiness.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:true_values</span>
+          <span class="type">(<tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>An array of objects that are the only ones that will be
+considered truthy.  <em>Any more involved checking than 'is
+it one of these?' should be handled with a truthiness
+proc.</em></p>
+
+<p>This is only meaningful if <code>:truthiness_proc</code> isn't used.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:truthiness_proc</span>
+          <span class="type">(<tt>Proc</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>Proc to be called</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the evaluation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/UncallableObject.html" title="TAGF::Exceptions::UncallableObject (class)">TAGF::Exceptions::UncallableObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the <code>:truthiness_proc</code> argument doesn't respond to the
+<code>:call</code> method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Truthy_Test_Proc</li>
+    
+      <li><span class='object_link'><a href="UniversalMethods.html#Truthy_Strings-constant" title="TAGF::Mixin::UniversalMethods::Truthy_Strings (constant)">Truthy_Strings</a></span></li>
+    
+      <li><span class='object_link'><a href="UniversalMethods.html#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></li>
+    
+      <li><span class='object_link'><a href="UniversalMethods.html#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span></li>
+    
+      <li><span class='object_link'><a href="UniversalMethods.html#Complex_String-constant" title="TAGF::Mixin::UniversalMethods::Complex_String (constant)">Complex_String</a></span></li>
+    
+      <li><span class='object_link'><a href="UniversalMethods.html#Integer_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Integer_String_RE (constant)">Integer_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="UniversalMethods.html#Float_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Float_String_RE (constant)">Float_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="UniversalMethods.html#Complex_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Complex_String_RE (constant)">Complex_String_RE</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sat Mar  2 12:52:14 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.0.5).
+</div>
+
+    </div>
+  </body>
+</html>

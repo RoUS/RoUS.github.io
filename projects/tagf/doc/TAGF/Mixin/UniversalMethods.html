@@ -1,0 +1,2697 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: TAGF::Mixin::UniversalMethods
+  
+    &mdash; Text Adventure Framework (TAF) Gem
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "TAGF::Mixin::UniversalMethods";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (U)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Mixin.html" title="TAGF::Mixin (module)">Mixin</a></span></span>
+     &raquo; 
+    <span class="title">UniversalMethods</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: TAGF::Mixin::UniversalMethods
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+  <dl>
+    <dt>Included in:</dt>
+    <dd><span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span>, <span class='object_link'><a href="../CLI.html" title="TAGF::CLI (class)">CLI</a></span>, <span class='object_link'><a href="../Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span>, <span class='object_link'><a href="../Exceptions/ErrorBase.html" title="TAGF::Exceptions::ErrorBase (class)">Exceptions::ErrorBase</a></span>, <span class='object_link'><a href="../Exceptions/InventoryLimitExceeded.html" title="TAGF::Exceptions::InventoryLimitExceeded (module)">Exceptions::InventoryLimitExceeded</a></span>, <span class='object_link'><a href="../Exceptions/MapError.html" title="TAGF::Exceptions::MapError (module)">Exceptions::MapError</a></span>, <span class='object_link'><a href="../Filer.html" title="TAGF::Filer (class)">Filer</a></span>, <span class='object_link'><a href="../Inventory.html" title="TAGF::Inventory (class)">Inventory</a></span>, <span class='object_link'><a href="../Item.html" title="TAGF::Item (class)">Item</a></span>, <span class='object_link'><a href="../Keyword.html" title="TAGF::Keyword (class)">Keyword</a></span>, <span class='object_link'><a href="../Location.html" title="TAGF::Location (class)">Location</a></span>, <span class='object_link'><a href="ClassMethods.html" title="TAGF::Mixin::ClassMethods (module)">ClassMethods</a></span>, <span class='object_link'><a href="ClassTypes.html" title="TAGF::Mixin::ClassTypes (module)">ClassTypes</a></span>, <span class='object_link'><a href="Container.html" title="TAGF::Mixin::Container (module)">Container</a></span>, <span class='object_link'><a href="Element.html" title="TAGF::Mixin::Element (module)">Element</a></span>, <span class='object_link'><a href="Events.html" title="TAGF::Mixin::Events (module)">Events</a></span>, <span class='object_link'><a href="Graphable.html" title="TAGF::Mixin::Graphable (module)">Graphable</a></span>, <span class='object_link'><a href="LightSource.html" title="TAGF::Mixin::LightSource (module)">LightSource</a></span>, <span class='object_link'><a href="Portable.html" title="TAGF::Mixin::Portable (module)">Portable</a></span>, <span class='object_link'><a href="Sealable.html" title="TAGF::Mixin::Sealable (module)">Sealable</a></span>, <span class='object_link'><a href="../Path.html" title="TAGF::Path (class)">Path</a></span>, <span class='object_link'><a href="../Reality.html" title="TAGF::Reality (class)">Reality</a></span>, <span class='object_link'><a href="../UI.html" title="TAGF::UI (module)">UI</a></span>, <span class='object_link'><a href="../UI/Controls.html" title="TAGF::UI::Controls (module)">UI::Controls</a></span>, <span class='object_link'><a href="../UI/Interface.html" title="TAGF::UI::Interface (class)">UI::Interface</a></span>, <span class='object_link'><a href="../../Test_Game.html" title="Test_Game (class)">Test_Game</a></span>, <span class='object_link'><a href="../../Test_Inventory.html" title="Test_Inventory (class)">Test_Inventory</a></span>, <span class='object_link'><a href="../../Test_Raise_Exception.html" title="Test_Raise_Exception (class)">Test_Raise_Exception</a></span>, <span class='object_link'><a href="../../Test_UI.html" title="Test_UI (class)">Test_UI</a></span>, <span class='object_link'><a href="../../Test_UniversalMethods.html" title="Test_UniversalMethods (class)">Test_UniversalMethods</a></span></dd>
+  </dl>
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/tagf/mixin/universal.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Defines basic methods and extends class methods for all portions
+of the <span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span> module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="GAME_OPTIONS-constant" class="">GAME_OPTIONS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>List of game-wide option flags to impose (or relax) certain
+restrictions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+ </span><span class='tstring_content'>RaiseOnInvalidValues</span><span class='words_sep'>
+ </span><span class='tstring_content'>EnableHitpoints</span><span class='words_sep'>
+ </span><span class='tstring_content'>EnforceLighting</span><span class='words_sep'>
+ </span><span class='tstring_content'>EnforceMass</span><span class='words_sep'>
+ </span><span class='tstring_content'>EnforceVolume</span><span class='words_sep'>
+ </span><span class='tstring_content'>EnforceItemCounts</span><span class='words_sep'>
+ </span><span class='tstring_content'>EnforceCapacities</span><span class='words_sep'>
+</span><span class='tstring_end'>]</span></span></pre></dd>
+      
+        <dt id="GAME_OPTION_CLUMPS-constant" class="">GAME_OPTION_CLUMPS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Related options that can enabled/disabled collectively as well
+as individually.  These are called option 'clumps.'</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='label'>EnforceCapacities:</span> <span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+                        </span><span class='tstring_content'>EnforceMass</span><span class='words_sep'>
+                        </span><span class='tstring_content'>EnforceVolume</span><span class='words_sep'>
+                        </span><span class='tstring_content'>EnforceItemCounts</span><span class='words_sep'>
+                       </span><span class='tstring_end'>]</span></span><span class='comma'>,</span>
+<span class='rbrace'>}</span></pre></dd>
+      
+        <dt id="C_Attitudes-constant" class="">C_Attitudes =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Symbols describing possible attitudes available to an actor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+ </span><span class='tstring_content'>obsessed</span><span class='words_sep'>
+ </span><span class='tstring_content'>friendly</span><span class='words_sep'>
+ </span><span class='tstring_content'>neutral</span><span class='words_sep'>
+ </span><span class='tstring_content'>fearful</span><span class='words_sep'>
+ </span><span class='tstring_content'>dislike</span><span class='words_sep'>
+ </span><span class='tstring_content'>hostile</span><span class='words_sep'>
+</span><span class='tstring_end'>]</span></span></pre></dd>
+      
+        <dt id="Truthy_Strings-constant" class="">Truthy_Strings =
+          <div class="docstring">
+  <div class="discussion">
+    <p>List of (case-insensitive) strings that evaluate to a Boolean
+<code>true</code> value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qwords_beg'>%w[</span><span class='words_sep'> </span><span class='tstring_content'>y</span><span class='words_sep'> </span><span class='tstring_content'>yes</span><span class='words_sep'> </span><span class='tstring_content'>t</span><span class='words_sep'> </span><span class='tstring_content'>true</span><span class='words_sep'> </span><span class='tstring_content'>on</span><span class='words_sep'> </span><span class='tstring_end'>]</span></span></pre></dd>
+      
+        <dt id="UnTruthy_Strings-constant" class="">UnTruthy_Strings =
+          <div class="docstring">
+  <div class="discussion">
+    <p>List of (case-insensitive) strings that explicitly evaluate to
+a Boolean <code>false</code> value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qwords_beg'>%w[</span><span class='words_sep'> </span><span class='tstring_content'>n</span><span class='words_sep'> </span><span class='tstring_content'>no</span><span class='words_sep'> </span><span class='tstring_content'>f</span><span class='words_sep'> </span><span class='tstring_content'>false</span><span class='words_sep'> </span><span class='tstring_content'>off</span><span class='words_sep'> </span><span class='tstring_content'>nil</span><span class='words_sep'> </span><span class='tstring_content'>null</span><span class='words_sep'> </span><span class='tstring_end'>]</span></span></pre></dd>
+      
+        <dt id="Digit_String-constant" class="">Digit_String =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Regular expression pattern matching an integer or bignum
+string.  Used by itself, and also by <span class='object_link'><a href="#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span> and
+<span class='object_link'><a href="#Complex_String-constant" title="TAGF::Mixin::UniversalMethods::Complex_String (constant)">Complex_String</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\d+</span><span class='tstring_end'>&#39;</span></span></pre></dd>
+      
+        <dt id="Float_String-constant" class="">Float_String =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Regular expression pattern matching a floating point string.
+Also used by <span class='object_link'><a href="#Complex_String-constant" title="TAGF::Mixin::UniversalMethods::Complex_String (constant)">Complex_String</a></span>.  Modern Ruby requires digits on
+both sides of the decimal point.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s\.%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+<span class='const'><span class='object_link'><a href="#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></span><span class='comma'>,</span>
+<span class='const'><span class='object_link'><a href="#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="Complex_String-constant" class="">Complex_String =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Regular expression matching a Ruby complex number string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\(?(?:%s|%s)[-+](?:%s|%s)i\)?</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+<span class='const'><span class='object_link'><a href="#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></span><span class='comma'>,</span>
+<span class='const'><span class='object_link'><a href="#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span></span><span class='comma'>,</span>
+<span class='const'><span class='object_link'><a href="#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></span><span class='comma'>,</span>
+<span class='const'><span class='object_link'><a href="#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span></span><span class='rparen'>)</span></pre></dd>
+      
+        <dt id="Integer_String_RE-constant" class="">Integer_String_RE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Compiled regular expression matching a string of digits (an
+integer or bignum).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>^</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>$</span><span class='regexp_end'>!</span></span></pre></dd>
+      
+        <dt id="Float_String_RE-constant" class="">Float_String_RE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Compiled regular expression matching a Ruby Float as a string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>^</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>$</span><span class='regexp_end'>!</span></span></pre></dd>
+      
+        <dt id="Complex_String_RE-constant" class="">Complex_String_RE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Compiled regular expression matching Ruby's representation of
+a complex numeric value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>^</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#Complex_String-constant" title="TAGF::Mixin::UniversalMethods::Complex_String (constant)">Complex_String</a></span></span><span class='embexpr_end'>}</span><span class='tstring_content'>$</span><span class='regexp_end'>!</span></span></pre></dd>
+      
+        <dt id="Truthy_TestProc-constant" class="">Truthy_TestProc =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Default proc used to test for truthyness of any value of any
+kind.  Used by #truthify.  Can be used as an example for
+custom truthiness test procs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>Proc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='op'>|</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Symbols we don&#39;t handle directly, so convert them into
+</span>  <span class='comment'># Strings for evaluation.  This is perhaps a cop-out.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_testvalue'>testvalue</span>     <span class='op'>=</span> <span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># This is a messy tree of if/elsif/else/end checks.  Each
+</span>  <span class='comment'># [els]if block is moronically simple, making this look
+</span>  <span class='comment'># overengineered, but there are reasons.  Firstly because
+</span>  <span class='comment'># there are several conditions (and subconditions) to check,
+</span>  <span class='comment'># and secondly because putting them all into a single
+</span>  <span class='comment'># conditional is even worse (and &#39;first true result
+</span>  <span class='comment'># short-circuits the rest of the expression&#39; wasn&#39;t working as
+</span>  <span class='comment'># expected).  Plus, this makes adding/changing/deleting checks
+</span>  <span class='comment'># much simpler.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># First, check explicit Boolean values, since they
+</span>  <span class='comment'># short-circuit the testing massively.  `true` is, of course,
+</span>  <span class='comment'># true.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span> <span class='op'>==</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='op'>||</span>
+      <span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_result'>result</span>        <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_result'>result</span>        <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Numeric</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='comment'>#
+</span>    <span class='comment'># If it&#39;s a numeric value (of any kind), anything that
+</span>    <span class='comment'># isn&#39;t zero is considered true.
+</span>    <span class='comment'>#
+</span>    <span class='comment'># Checking past this point is for strings, which depends
+</span>    <span class='comment'># heavily on regular expression matching, which is
+</span>    <span class='comment'># consumptive.
+</span>    <span class='comment'>#
+</span>    <span class='id identifier rubyid_result'>result</span>        <span class='op'>=</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='comment'>#
+</span>    <span class='comment'># Now comes the complex part: checking to see if this string
+</span>    <span class='comment'># evaluates to something we should treat as true.  Explicit
+</span>    <span class='comment'># text string (checked in list of truthy strings), or string
+</span>    <span class='comment'># representations of numbers (checked as evaluating to
+</span>    <span class='comment'># zero).
+</span>    <span class='comment'>#
+</span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#Truthy_Strings-constant" title="TAGF::Mixin::UniversalMethods::Truthy_Strings (constant)">Truthy_Strings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># But first, is it one of our explicitly truthy strings?
+</span>      <span class='comment'># (Easy first test.)
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_result'>result</span>      <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#UnTruthy_Strings-constant" title="TAGF::Mixin::UniversalMethods::UnTruthy_Strings (constant)">UnTruthy_Strings</a></span></span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># How about one of our explicitly UNtruthy strings?
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_result'>result</span>      <span class='op'>=</span> <span class='kw'>false</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span> <span class='op'>=~</span> <span class='const'><span class='object_link'><a href="#Integer_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Integer_String_RE (constant)">Integer_String_RE</a></span></span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># It&#39;a string of just decimal digits, but not evaluating
+</span>      <span class='comment'># to zero.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_result'>result</span>      <span class='op'>=</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='const'>Integer</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span> <span class='op'>=~</span> <span class='const'><span class='object_link'><a href="#Float_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Float_String_RE (constant)">Float_String_RE</a></span></span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Non-zero floating-point string?
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_result'>result</span>      <span class='op'>=</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='const'>Float</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span> <span class='op'>=~</span> <span class='const'><span class='object_link'><a href="#Complex_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Complex_String_RE (constant)">Complex_String_RE</a></span></span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Non-zero complex number?  The Complex coercion doesn&#39;t
+</span>      <span class='comment'># deal with parenthesised strings, so remove those before
+</span>      <span class='comment'># converting.  We could do it with a regex substitution,
+</span>      <span class='comment'># but slicing is faster.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_temp'>temp</span>        <span class='op'>=</span> <span class='id identifier rubyid_testvalue'>testvalue</span>
+      <span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>(</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='lbracket'>[</span><span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>)</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_temp'>temp</span>      <span class='op'>=</span> <span class='id identifier rubyid_testvalue'>testvalue</span><span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='int'>2</span><span class='rbracket'>]</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_result'>result</span>      <span class='op'>=</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='const'>Complex</span><span class='lparen'>(</span><span class='id identifier rubyid_temp'>temp</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='comment'>#
+</span>      <span class='comment'># None of our string cases matched, so it isn&#39;t explicitly
+</span>      <span class='comment'># truthy and isn&#39;t explicitly untruthy.  So it&#39;s false by
+</span>      <span class='comment'># default.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_result'>result</span>      <span class='op'>=</span> <span class='kw'>false</span>
+    <span class='kw'>end</span>
+  <span class='kw'>else</span>
+    <span class='comment'>#
+</span>    <span class='comment'># Sorry, didn&#39;t meet any of our conditions; not explicitly
+</span>    <span class='comment'># truthy.  Fall back on Ruby&#39;s interpretation.
+</span>    <span class='comment'>#
+</span>    <span class='id identifier rubyid_result'>result</span>        <span class='op'>=</span> <span class='id identifier rubyid_testvalue'>testvalue</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_result'>result</span>
+<span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#klassname-instance_method" title="#klassname (instance method)">#<strong>klassname</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the receiver's classname as a string, with all namespacing elements removed so it's just the unqualified portion.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#decompose_attrib-class_method" title="decompose_attrib (class method)">.<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; OpenStruct </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a symbolic attribute name and potentially a default value, return a structure containing fields for the various things needed to define methods dealing with it (String name, instance-variable symbol, attribute with suffices like <code>!</code>, <code>?</code>, <code>=</code>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included-class_method" title="included (class method)">.<strong>included</strong>(klass)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Module eigenclass method invoked whenever the module is <code>include</code>d into another class or module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_game_element%3F-class_method" title="is_game_element? (class method)">.<strong>is_game_element?</strong>(target)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return <code>true</code> if the given object is a game element — that is, its eigenclass has included (or been extended by) the TAGF::Mixin::Element module.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#_inivaluate_args-instance_method" title="#_inivaluate_args (instance method)">#<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; Hash{Symbol=&gt;Any} </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of <em>keysym:inival</em> tuples built from merging the <em>kwargs</em> hash onto the one constructed from the <em>args</em> array and the <em>default</em> value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#decompose_attrib-instance_method" title="#decompose_attrib (instance method)">#<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; OpenStruct </a>
+    
+
+    
+  </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a symbolic attribute name and potentially a default value, return a structure containing fields for the various things needed to define methods dealing with it (String name, instance-variable symbol, attribute with suffices like <code>!</code>, <code>?</code>, <code>=</code>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#game_options%3F-instance_method" title="#game_options? (instance method)">#<strong>game_options?</strong>(option, *args)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check to see whether one or more game options are currently enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_game_element%3F-instance_method" title="#is_game_element? (instance method)">#<strong>is_game_element?</strong>(target)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return <code>true</code> if the given object is a game element — that is, its eigenclass has included (or been extended by) the TAGF::Mixin::Element module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loadable_fields-instance_method" title="#loadable_fields (instance method)">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+      (also: #abstracted_fields)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of field names built from concatenating values of the constant from the receiver class and all of its ancestors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pluralise-instance_method" title="#pluralise (instance method)">#<strong>pluralise</strong>(word, number = 1)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a word (presumably a singular noun) and a count, return the plural of the word if the count justifies it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raise_exception-instance_method" title="#raise_exception (instance method)">#<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Either uses a passed exception or creates a new exception object according to the <code>exc_object</code> parameter, edits the backtrace to remove the appropriate number of stack frames, and raises it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#symbolise_kwargs-instance_method" title="#symbolise_kwargs (instance method)">#<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; Hash&lt;Symbol=&gt;Any&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translate a hash into one with all-symbolic keys, according to standard <code>**kwargs</code> semantics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#truthify-instance_method" title="#truthify (instance method)">#<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert a value (string, numeric, any kind of object) into a Boolean.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="klassname-instance_method">
+  
+    #<strong>klassname</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the receiver's classname as a string, with all
+namespacing elements removed so it's just the unqualified
+portion.  <em>E.g.</em>, an invocation by an object of class
+<code>TAGF::Exceptions::DummyError</code> would return <code>DummyError</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 205</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_klassname'>klassname</span><span class='lparen'>(</span><span class='id identifier rubyid_rcvr'>rcvr</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_rcvr'>rcvr</span>		<span class='op'>=</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_rcvr'>rcvr</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>		<span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+  <span class='comment'>#
+</span>  <span class='comment'># We&#39;re trying to figure out the name of the class, so if the
+</span>  <span class='comment'># receiver isn&#39;t one itself, switch to use the class to which
+</span>  <span class='comment'># it belongs.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_rcvr'>rcvr</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_rcvr'>rcvr</span>		<span class='op'>=</span> <span class='id identifier rubyid_rcvr'>rcvr</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_result'>result</span>		<span class='op'>=</span> <span class='id identifier rubyid_rcvr'>rcvr</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>^.*::</span><span class='regexp_end'>!</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="decompose_attrib-class_method">
+  
+    .<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; <tt>OpenStruct</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Given a symbolic attribute name and potentially a default
+value, return a structure containing fields for the various
+things needed to define methods dealing with it
+(String name, instance-variable symbol, attribute with
+suffices like <code>!</code>, <code>?</code>, <code>=</code>).  Any non-alphanumeric,
+non-underscore characters are silently stripped before the
+name is processed.</p>
+
+<p>See the return value for details of the returned structure.</p>
+
+<pre class="code ruby"><code class="ruby">    default:    The default value from this method invocation;
+                default `nil`
+    str:        The base attribute name as a String
+    attrib:     The base attribute name as a Symbol
+    getter:     (Same as :attrib field)
+    setter:     The symbolic attribute name with a `=` suffix
+    query:      The symbolic attribute name with a `?` suffix
+    bang:       The symbolic attribute name with a `!` suffix
+    ivar:       The symbolic name for the corresponding
+                instance variable (_e.g._, `:@&lt;attrib_p&gt;`)
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attrib_p</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>OpenStruct</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Fields in the structure are:</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 736</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_decompose_attrib'>decompose_attrib</span><span class='lparen'>(</span><span class='id identifier rubyid_attrib_p'>attrib_p</span><span class='comma'>,</span> <span class='id identifier rubyid_default'>default</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_strval'>strval</span>          <span class='op'>=</span> <span class='id identifier rubyid_attrib_p'>attrib_p</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>[^_[:alnum:]]*$</span><span class='regexp_end'>!</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_pieces'>pieces</span>          <span class='op'>=</span> <span class='const'>OpenStruct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>default:</span>      <span class='id identifier rubyid_default'>default</span><span class='comma'>,</span>
+    <span class='label'>str:</span>          <span class='id identifier rubyid_strval'>strval</span><span class='comma'>,</span>
+    <span class='label'>attrib:</span>       <span class='id identifier rubyid_strval'>strval</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>getter:</span>       <span class='id identifier rubyid_strval'>strval</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>setter:</span>       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>query:</span>        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_content'>?</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>bang:</span>         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_content'>!</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>ivar:</span>         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+  <span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_pieces'>pieces</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="included-class_method">
+  
+    .<strong>included</strong>(klass)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Module eigenclass method invoked whenever the module is
+<code>include</code>d into another class or module.</p>
+
+<p>As long as the including object is a module or a named Class
+object, we'll also extend its eigenclass.  This make sure
+anyplace the module is included, so is its eigenclass.
+Since this is the UniversalMethods module, this ensures that
+its definitions really <em>are</em> universal.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The class into which the module is being <code>include</code>d.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_included'>included</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='rparen'>)</span>
+  <span class='comment'>#
+</span>  <span class='comment'># If the including object is a module or a named class,
+</span>  <span class='comment'># also extend it with our UniversalMethods module.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Module</span><span class='rparen'>)</span> \
+      <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span> \
+          <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_extend'>extend</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="" title="TAGF::Mixin::UniversalMethods (module)">UniversalMethods</a></span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_game_element?-class_method">
+  
+    .<strong>is_game_element?</strong>(target)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return <code>true</code> if the given object is a game element — that is,
+its eigenclass has included (or been extended by) the
+TAGF::Mixin::Element module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+463
+464
+465
+466</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 463</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_game_element?'>is_game_element?</span><span class='lparen'>(</span><span class='id identifier rubyid_target'>target</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>  <span class='op'>=</span> <span class='id identifier rubyid_target'>target</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Mixin.html" title="TAGF::Mixin (module)">Mixin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Element.html" title="TAGF::Mixin::Element (module)">Element</a></span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_inivaluate_args-instance_method">
+  
+    #<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; <tt>Hash{Symbol=&gt;Any}</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(nil)
+Whatever default value should be supplied for attributes
+listed in the <code>args</code> array.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) array of attribute identifiers.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) hash of <em>keysym:inival</em> tuples.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>inival</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>allows an attribute declarator to perform validity checks or
+transformations on the initial values (such as ensuring they
+are all of a particular class (<em>e.g.</em>, <code>TrueClass</code> or
+<code>FalseClass</code> for a Boolean attribute).</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>inival</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>each <em>inival</em> in turn.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Returns:</p>
+<ul class="yieldreturn">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever tranformation, if any, the block performs on the
+<em>inival</em>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 243</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid__inivaluate_args'>_inivaluate_args</span><span class='lparen'>(</span><span class='id identifier rubyid_default'>default</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_argc'>argc</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span><span class='rparen'>)</span>
+    <span class='comment'>#
+</span>    <span class='comment'># Turn any bare attributes into hashes with the appropriate
+</span>    <span class='comment'># default setting.
+</span>    <span class='comment'>#
+</span>    <span class='id identifier rubyid_defaults'>defaults</span>      <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_default'>default</span><span class='rbracket'>]</span> <span class='op'>*</span> <span class='id identifier rubyid_argc'>argc</span>
+    <span class='id identifier rubyid_nmargs'>nmargs</span>        <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_o'>o</span><span class='op'>|</span> <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_nmargs'>nmargs</span>        <span class='op'>=</span> <span class='id identifier rubyid_nmargs'>nmargs</span><span class='period'>.</span><span class='id identifier rubyid_zip'>zip</span><span class='lparen'>(</span><span class='id identifier rubyid_defaults'>defaults</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ary'>ary</span><span class='op'>|</span> <span class='const'>Hash</span><span class='lbracket'>[</span><span class='op'>*</span><span class='id identifier rubyid_ary'>ary</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_nmargs'>nmargs</span>        <span class='op'>=</span> <span class='id identifier rubyid_nmargs'>nmargs</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:merge</span><span class='rparen'>)</span>
+    <span class='comment'>#
+</span>    <span class='comment'># Do it in the `nmargs.merge(kwargs)` order so any
+</span>    <span class='comment'># attributes that &lt;em&gt;were&lt;/em&gt; given initial values override
+</span>    <span class='comment'># bare ones of the same name picking up the default.
+</span>    <span class='comment'>#
+</span>    <span class='id identifier rubyid_kwargs'>kwargs</span>        <span class='op'>=</span> <span class='id identifier rubyid_nmargs'>nmargs</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Allow refinement of the initial values by a block supplied
+</span>  <span class='comment'># by our caller.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_block_given?'>block_given?</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+      <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span>   <span class='op'>=</span> <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_kwargs'>kwargs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decompose_attrib-instance_method">
+  
+    #<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; <tt>OpenStruct</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Given a symbolic attribute name and potentially a default
+value, return a structure containing fields for the various
+things needed to define methods dealing with it
+(String name, instance-variable symbol, attribute with
+suffices like <code>!</code>, <code>?</code>, <code>=</code>).  Any non-alphanumeric,
+non-underscore characters are silently stripped before the
+name is processed.</p>
+
+<p>See the return value for details of the returned structure.</p>
+
+<pre class="code ruby"><code class="ruby">    default:    The default value from this method invocation;
+                default `nil`
+    str:        The base attribute name as a String
+    attrib:     The base attribute name as a Symbol
+    getter:     (Same as :attrib field)
+    setter:     The symbolic attribute name with a `=` suffix
+    query:      The symbolic attribute name with a `?` suffix
+    bang:       The symbolic attribute name with a `!` suffix
+    ivar:       The symbolic name for the corresponding
+                instance variable (_e.g._, `:@&lt;attrib_p&gt;`)
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attrib_p</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>OpenStruct</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Fields in the structure are:</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 736</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_decompose_attrib'>decompose_attrib</span><span class='lparen'>(</span><span class='id identifier rubyid_attrib_p'>attrib_p</span><span class='comma'>,</span> <span class='id identifier rubyid_default'>default</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_strval'>strval</span>          <span class='op'>=</span> <span class='id identifier rubyid_attrib_p'>attrib_p</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>[^_[:alnum:]]*$</span><span class='regexp_end'>!</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_pieces'>pieces</span>          <span class='op'>=</span> <span class='const'>OpenStruct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='label'>default:</span>      <span class='id identifier rubyid_default'>default</span><span class='comma'>,</span>
+    <span class='label'>str:</span>          <span class='id identifier rubyid_strval'>strval</span><span class='comma'>,</span>
+    <span class='label'>attrib:</span>       <span class='id identifier rubyid_strval'>strval</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>getter:</span>       <span class='id identifier rubyid_strval'>strval</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>setter:</span>       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>query:</span>        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_content'>?</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>bang:</span>         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_content'>!</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='comma'>,</span>
+    <span class='label'>ivar:</span>         <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_strval'>strval</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+  <span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_pieces'>pieces</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="game_options?-instance_method">
+  
+    #<strong>game_options?</strong>(option, *args)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check to see whether one or more game options are currently
+enabled.  If any arguments aren't recognised as game options,
+a warning is sent to <code>stderr</code> and that argument is ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>option</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if <strong>all</strong> of the requested options are currently
+enabled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 283</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_game_options?'>game_options?</span><span class='lparen'>(</span><span class='id identifier rubyid_option'>option</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_requested'>requested</span>       <span class='op'>=</span> <span class='const'>Set</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='id identifier rubyid_option'>option</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_o'>o</span><span class='op'>|</span> <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_unknown'>unknown</span>         <span class='op'>=</span> <span class='id identifier rubyid_requested'>requested</span> <span class='op'>-</span> <span class='const'><span class='object_link'><a href="#GAME_OPTIONS-constant" title="TAGF::Mixin::UniversalMethods::GAME_OPTIONS (constant)">GAME_OPTIONS</a></span></span>
+  <span class='id identifier rubyid_unknown'>unknown</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_opt'>opt</span><span class='op'>|</span>
+    <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s.%s: unknown game option: %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>TAGF</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                <span class='id identifier rubyid___method__'>__method__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+                <span class='id identifier rubyid_opt'>opt</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_requested'>requested</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_opt'>opt</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_active'>active</span>          <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='period'>.</span><span class='id identifier rubyid_game_options'><span class='object_link'><a href="PackageClassMethods.html#game_options-instance_method" title="TAGF::Mixin::PackageClassMethods#game_options (method)">game_options</a></span></span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_requested'>requested</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_opt'>opt</span><span class='op'>|</span> <span class='id identifier rubyid_active'>active</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_opt'>opt</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_game_element?-instance_method">
+  
+    #<strong>is_game_element?</strong>(target)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return <code>true</code> if the given object is a game element — that is,
+its eigenclass has included (or been extended by) the
+TAGF::Mixin::Element module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+463
+464
+465
+466</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 463</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_game_element?'>is_game_element?</span><span class='lparen'>(</span><span class='id identifier rubyid_target'>target</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>  <span class='op'>=</span> <span class='id identifier rubyid_target'>target</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Mixin.html" title="TAGF::Mixin (module)">Mixin</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Element.html" title="TAGF::Mixin::Element (module)">Element</a></span></span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>?</span> <span class='kw'>true</span> <span class='op'>:</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loadable_fields-instance_method">
+  
+    
+      <span class="overload">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+      <span class="overload">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='abstracted_fields-instance_method'>abstracted_fields</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Look at the constant <code>Loadable_Fields</code> for the receiver
+class and all of its ancestors, and return an array of all
+unique values therein.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Same as #loadable_fields save that it uses the
+<code>Abstracted_Fields</code> constants instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+  </ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rcvr</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(self)
+Class (or object whose class should be used) for which the
+list of fields should be derived.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 138</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_loadable_fields'>loadable_fields</span><span class='lparen'>(</span><span class='id identifier rubyid_rcvr'>rcvr</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Figure out how we were invoked, because it controls which
+</span>  <span class='comment'># constants we check.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_ftype'>ftype</span>		<span class='op'>=</span> <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_capitalize'>capitalize</span>
+  <span class='id identifier rubyid_ftype'>ftype</span>		<span class='op'>=</span> <span class='id identifier rubyid_ftype'>ftype</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>_fields</span><span class='regexp_end'>!</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>_Fields</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_rcvr'>rcvr</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_rcvr'>rcvr</span>          <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span> \
+                    <span class='op'>?</span> <span class='kw'>self</span> \
+                    <span class='op'>:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_singleton_class'>singleton_class</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_fieldlist'>fieldlist</span>	<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid___callee__'>__callee__</span> <span class='op'>==</span> <span class='symbol'>:loadable_fields</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_fieldlist'>fieldlist</span>       <span class='op'>=</span> <span class='id identifier rubyid_rcvr'>rcvr</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+      <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_ftype'>ftype</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+      <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='id identifier rubyid_ftype'>ftype</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:|</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid___callee__'>__callee__</span> <span class='op'>==</span> <span class='symbol'>:abstracted_fields</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_fieldlist'>fieldlist</span>       <span class='op'>=</span> <span class='id identifier rubyid_rcvr'>rcvr</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+      <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_ftype'>ftype</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='op'>|</span>
+      <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='id identifier rubyid_ftype'>ftype</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
+    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:merge</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># If there are none, the result of the above will be `nil`.
+</span>  <span class='comment'># We&#39;re supposed to return an array, so convert it.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_fieldlist'>fieldlist</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pluralise-instance_method">
+  
+    #<strong>pluralise</strong>(word, number = 1)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>At the moment, only English (<code>en</code>) words are supported.</p>
+</div>
+  </div>
+
+<p>Given a word (presumably a singular noun) and a count, return
+the plural of the word if the count justifies it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>word</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>either the original word, or the deduced plural if the
+<code>number</code> argument was an integer 1.  (Floats <em>always</em>
+use plurals, even if they're <code>1.000</code>.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+484
+485
+486
+487
+488
+489
+490</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 484</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_pluralise'>pluralise</span><span class='lparen'>(</span><span class='id identifier rubyid_word'>word</span><span class='comma'>,</span> <span class='id identifier rubyid_number'>number</span><span class='op'>=</span><span class='int'>1</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>          <span class='op'>=</span> <span class='id identifier rubyid_word'>word</span>
+  <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id identifier rubyid_number'>number</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Integer</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_number'>number</span> <span class='op'>==</span> <span class='int'>1</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_result'>result</span>        <span class='op'>=</span> <span class='id identifier rubyid_word'>word</span><span class='period'>.</span><span class='id identifier rubyid_en'>en</span><span class='period'>.</span><span class='id identifier rubyid_plural'>plural</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="raise_exception-instance_method">
+  
+    #<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p><p>Either uses a passed exception or creates a new exception
+object according to the <code>exc_object</code> parameter, edits the
+backtrace to remove the appropriate number of stack frames,
+and raises it.</p>
+
+<p>Acceptable values for <code>exc_object</code> are any of the following:</p>
+
+<dl>
+<dt>1. a string</dt>
+<dd>a new <code>RuntimeError</code> exception is created from the
+ string.  <code>args</code> is ignored.</dd>
+<dt>2. an exception object</dt>
+<dd>the object is raised as is.  <code>args</code> is ignored.</dd>
+<dt>3. an exception class</dt>
+<dd>a new exception object is created from this constructor.
+ <code>args</code> is passed to the constructor, and <code>kwargs</code> as well
+ if <code>exc_object</code> is a descendant of
+ <span class='object_link'><a href="../Exceptions/ErrorBase.html" title="TAGF::Exceptions::ErrorBase (class)">Exceptions::ErrorBase</a></span>.</dd>
+<dt>4. a callable object that returns one of the above</dt>
+<dd>anything that responds to the <code>:call</code> method falls into
+ this category.  It will be invoked with <code>.call(*args)</code>.
+ <code>kwargs</code> isn't passed.</dd>
+</dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>exc_object</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Class</tt>, <tt>Exception</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string (converted to a <code>RuntimeError</code> exception), an
+exception class, an actual exception, or a <code>Proc</code> that
+returns one of the above.  See the method description.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of arguments to pass to any exception constructor
+invoked.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of keyword arguments to pass to the constructor,
+possibly with the <code>:levels</code> keyword which will be consumed
+by this method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:levels</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>1</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>The number of stack frames to pop off the backtrace.  The
+default is 1, meaning that the caller's caller will appear
+to be the location raising the exception.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/NotExceptional.html" title="TAGF::Exceptions::NotExceptional (class)">TAGF::Exceptions::NotExceptional</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>NotExceptional</code> exception is if the argument wasn't a
+string, an exception instance, an exception class, or a proc
+that (eventually) returns an exception class or instance.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever valid exception was derived from the arguments.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 343</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='id identifier rubyid_exc_object'>exc_object</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:levels</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='int'>1</span>
+  <span class='id identifier rubyid_bt'>bt</span>              <span class='op'>=</span> <span class='id identifier rubyid_caller'>caller</span>
+
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&quot;\n%s entry backtrace:&quot; +
+</span><span class='embdoc'>              &quot;\n  levels: %i&quot; +
+</span><span class='embdoc'>              &quot;\n  exc_object=%s:%s&quot; +
+</span><span class='embdoc'>              &quot;\n  %s&quot;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              kwargs[:levels].to_i,
+</span><span class='embdoc'>              exc_object.class.name,
+</span><span class='embdoc'>              exc_object.inspect,
+</span><span class='embdoc'>              PP.pp(bt[0,10],
+</span><span class='embdoc'>                    String.new).gsub(%r!\n!, &quot;\n  &quot;)))
+</span><span class='embdoc_end'>=end
+</span>  <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
+    <span class='comment'>#
+</span>    <span class='comment'># `exc_object` possibilities:
+</span>    <span class='comment'># * an exception instance
+</span>    <span class='comment'>#   : used as-is
+</span>    <span class='comment'># * an exception class (.ancestors.include?(:Exception))
+</span>    <span class='comment'>#   : an instance will be created from it and `args`
+</span>    <span class='comment'># * something callable
+</span>    <span class='comment'>#   : exc_object.call(*args), then repeat
+</span>    <span class='comment'># * a string
+</span>    <span class='comment'>#   : a `RuntimeError` instance is created from exc_object;
+</span>    <span class='comment'>#   `args` is ignored
+</span>    <span class='comment'># * anything else
+</span>    <span class='comment'>#   : raise a Exceptions::NotExceptional exception
+</span>    <span class='comment'>#
+</span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Exception</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># We were passed an actual exception instance, not a
+</span>      <span class='comment'># class.
+</span>      <span class='comment'>#
+</span>      <span class='kw'>break</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># It&#39;s a string!  Turn it into a `RuntimeError` the way a
+</span>      <span class='comment'># simple `raise(&quot;string&quot;)` does.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_exc_object'>exc_object</span>  <span class='op'>=</span> <span class='const'>RuntimeError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_exc_object'>exc_object</span><span class='rparen'>)</span>
+      <span class='kw'>break</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:call</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Something callable, which *might* return a valid
+</span>      <span class='comment'># exception instance or class.  Try it, and loop through
+</span>      <span class='comment'># again.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_exc_object'>exc_object</span>  <span class='op'>=</span> <span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+      <span class='kw'>next</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span><span class='rparen'>)</span> \
+           <span class='op'>||</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'>Exception</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Not a class at all, or at least not one descended from
+</span>      <span class='comment'># `Exception`.  Raise an exception using ourself,
+</span>      <span class='comment'># incrementing the level count to take our recursive call
+</span>      <span class='comment'># and loop out of the backtrace.
+</span>      <span class='comment'>#
+</span>      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid___callee__'>__callee__</span><span class='comma'>,</span>
+                <span class='const'><span class='object_link'><a href="../Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/NotExceptional.html" title="TAGF::Exceptions::NotExceptional (class)">NotExceptional</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Exceptions/NotExceptional.html#initialize-instance_method" title="TAGF::Exceptions::NotExceptional#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>offender:</span> <span class='id identifier rubyid_exc_object'>exc_object</span><span class='rparen'>)</span><span class='comma'>,</span>
+                <span class='label'>levels:</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:levels</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>+</span> <span class='int'>2</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='comment'>#
+</span>      <span class='comment'># This appears to be an actual exception class, so create
+</span>      <span class='comment'># an instance from it.  If it&#39;s one of ours, pass the
+</span>      <span class='comment'># `kwargs` hash too (minus our `:levels` keyword),
+</span>      <span class='comment'># otherwise just pass the `args` array.
+</span>      <span class='comment'>#
+</span>      <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span> \
+          <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_ancestors'>ancestors</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/ErrorBase.html" title="TAGF::Exceptions::ErrorBase (class)">ErrorBase</a></span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_nkwargs'>nkwargs</span>   <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+        <span class='id identifier rubyid_nkwargs'>nkwargs</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='symbol'>:levels</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_exc_object'>exc_object</span> <span class='op'>=</span> <span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_nkwargs'>nkwargs</span><span class='rparen'>)</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_exc_object'>exc_object</span> <span class='op'>=</span> <span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Break out of the loop.
+</span>      <span class='comment'>#
+</span>      <span class='kw'>break</span>
+    <span class='kw'>end</span>                   <span class='comment'># exception-deduction if-tree
+</span>  <span class='kw'>end</span>                     <span class='comment'># loop do
+</span>  <span class='comment'>#
+</span>  <span class='comment'># `exc_object` is an actual exception instance.  Let&#39;s edit
+</span>  <span class='comment'># the backtrace and raise the sucker.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># By default we add ourself to what&#39;s being elided; this can
+</span>  <span class='comment'># be overridden by passing `:levels` with a value &lt;= 0.
+</span>  <span class='comment'>#
+</span>  <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:levels</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_bt'>bt</span><span class='period'>.</span><span class='id identifier rubyid_shift'>shift</span> <span class='rbrace'>}</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&quot;%s edited backtrace:&quot; +
+</span><span class='embdoc'>              &quot;\n  levels: %i&quot; +
+</span><span class='embdoc'>              &quot;\n  exc_object=%s:%s&quot; +
+</span><span class='embdoc'>              &quot;\n  %s&quot;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              kwargs[:levels].to_i,
+</span><span class='embdoc'>              exc_object.class.name,
+</span><span class='embdoc'>              exc_object.inspect,
+</span><span class='embdoc'>              PP.pp(bt[0,10],
+</span><span class='embdoc'>                    String.new).gsub(%r!\n!, &quot;\n  &quot;)))
+</span><span class='embdoc_end'>=end
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Pass any arguments to the exception constructor, set the new
+</span>  <span class='comment'># exception object&#39;s backtrace to our caller (or whatever
+</span>  <span class='comment'># stack frame was made current), and raise it.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_exc_object'>exc_object</span><span class='period'>.</span><span class='id identifier rubyid_set_backtrace'>set_backtrace</span><span class='lparen'>(</span><span class='id identifier rubyid_bt'>bt</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='id identifier rubyid_exc_object'>exc_object</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="symbolise_kwargs-instance_method">
+  
+    #<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; <tt>Hash&lt;Symbol=&gt;Any&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translate a hash into one with all-symbolic keys, according to
+standard <code>**kwargs</code> semantics.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol,String=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a copy of the <code>kwargs</code> argument with all keys converted to
+symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RuntimeError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><tt>"symbolise_kwargs kwargs keys must be Symbols or
+Strings: <em>classname</em>:<em>key</em>"</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 183</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_symbolise_kwargs'>symbolise_kwargs</span><span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>		<span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span><span class='id identifier rubyid_v'>v</span><span class='op'>|</span>
+    <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'>RuntimeError</span><span class='comma'>,</span>
+                      <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s kwargs keys must be </span><span class='tstring_end'>&#39;</span></span> \
+                             <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Symbols or Strings: %s:%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                             <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+                             <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+                             <span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_result'>result</span><span class='lbracket'>[</span><span class='id identifier rubyid_k'>k</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span><span class='op'>=</span> <span class='id identifier rubyid_v'>v</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="truthify-instance_method">
+  
+    #<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert a value (string, numeric, any kind of object) into a
+Boolean.  This varies slightly from normal Ruby semantics in
+that an integer 0 is considered <code>false</code> whereas normal Ruby
+interpretation would consider it <code>true</code>.</p>
+
+<p>Any value which isn't represented in the list of truthy values
+is considered <code>false</code>.</p>
+
+<p>The default list of truthy values can be augmented or replaced
+by using the keyword arguments <code>:true_values</code> and <code>:replace</code>.
+See the option descriptions below.</p>
+
+<p>More involved checking can be performed by supplying a proc
+(which is what the default implementation uses).  This module
+supplies some possibly-useful string and Regexp constants.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>testvalue</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>value to evaluate for truthiness.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:true_values</span>
+          <span class="type">(<tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>An array of objects that are the only ones that will be
+considered truthy.  <em>Any more involved checking than 'is
+it one of these?' should be handled with a truthiness
+proc.</em></p>
+
+<p>This is only meaningful if <code>:truthiness_proc</code> isn't used.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:truthiness_proc</span>
+          <span class="type">(<tt>Proc</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>Proc to be called</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the evaluation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/UncallableObject.html" title="TAGF::Exceptions::UncallableObject (class)">TAGF::Exceptions::UncallableObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the <code>:truthiness_proc</code> argument doesn't respond to the
+<code>:call</code> method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Truthy_Test_Proc</li>
+    
+      <li><span class='object_link'><a href="#Truthy_Strings-constant" title="TAGF::Mixin::UniversalMethods::Truthy_Strings (constant)">Truthy_Strings</a></span></li>
+    
+      <li><span class='object_link'><a href="#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></li>
+    
+      <li><span class='object_link'><a href="#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span></li>
+    
+      <li><span class='object_link'><a href="#Complex_String-constant" title="TAGF::Mixin::UniversalMethods::Complex_String (constant)">Complex_String</a></span></li>
+    
+      <li><span class='object_link'><a href="#Integer_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Integer_String_RE (constant)">Integer_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="#Float_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Float_String_RE (constant)">Float_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="#Complex_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Complex_String_RE (constant)">Complex_String_RE</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/mixin/universal.rb', line 692</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_truthify'>truthify</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_testproc'>testproc</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:truthiness_proc</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id identifier rubyid_testproc'>testproc</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:call</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='const'>UncallableObject</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>object:</span> <span class='id identifier rubyid_testproc'>testproc</span><span class='comma'>,</span>
+                                 <span class='label'>prefix:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invalid render_proc</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_testproc'>testproc</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='symbol'>:true_values</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='const'><span class='object_link'><a href="#Truthy_TestProc-constant" title="TAGF::Mixin::UniversalMethods::Truthy_TestProc (constant)">Truthy_TestProc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># We were passed an explicit list of truthy values.  Is this
+</span>  <span class='comment'># in the list?
+</span>  <span class='comment'>#
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:true_values</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_testvalue'>testvalue</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Sat Mar  2 12:52:15 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.0.5).
+</div>
+
+    </div>
+  </body>
+</html>
