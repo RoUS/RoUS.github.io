@@ -1,0 +1,4477 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: TAGF::UI::Context
+  
+    &mdash; Text Adventure Framework (TAF) Gem
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "TAGF::UI::Context";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../TAGF.html" title="TAGF (module)">TAGF</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../UI.html" title="TAGF::UI (module)">UI</a></span></span>
+     &raquo; 
+    <span class="title">Context</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: TAGF::UI::Context
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">TAGF::UI::Context</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  <dl>
+      <dt>Extended by:</dt>
+      <dd>Forwardable</dd>
+  </dl>
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../Mixin/DTypes.html" title="TAGF::Mixin::DTypes (module)">Mixin::DTypes</a></span>, <span class='object_link'><a href="Controls.html" title="TAGF::UI::Controls (module)">Controls</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/tagf/ui.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Main supervisory class for getting and processing input from the
+user.  Each time we change something about how we read, such as
+the input source or even the prompt, a new context should be
+created, pushed on a stack, and used.  When the changed
+conditions terminate, we should revert to the previous context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="CONTROLS_ADD-constant" class="">CONTROLS_ADD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Array of symbols identifying attributes that exist in this
+class but not in <span class='object_link'><a href="../UI.html#KWSYMS-constant" title="TAGF::UI::KWSYMS (constant)">KWSYMS</a></span>.  When attribute values are being
+collected, these are added to the list</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='qsymbols_beg'>%i[</span><span class='words_sep'>
+  </span><span class='tstring_content'>interface</span><span class='words_sep'>
+</span><span class='tstring_end'>]</span></span></pre></dd>
+      
+        <dt id="CONTROLS_OMIT-constant" class="">CONTROLS_OMIT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Array of symbols identifying attributes that may or may not
+exist in this class probably do in <span class='object_link'><a href="../UI.html#KWSYMS-constant" title="TAGF::UI::KWSYMS (constant)">KWSYMS</a></span>.  When attribute
+values are being collected, these are removed from the list.
+Attributes that are calculated, or don't actually exist in
+this class, or are delegated elsewhere, should appear in
+this list.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code">%i[</pre></dd>
+      
+        <dt id="DEFAULT_WORD_BREAK_CHARS-constant" class="">DEFAULT_WORD_BREAK_CHARS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Standard set of word-break characters for completion.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> \t\n`&gt;&lt;=;|&amp;{(</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#completion_proc-instance_method" title="#completion_proc (instance method)">#<strong>completion_proc</strong>  &#x21d2; Proc, ... </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#completion_proc-instance_method" title="TAGF::UI::Controls#completion_proc (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Proc or method object that should be used to handle completion checking and processing when reading input interactively.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#error+($stdin)-instance_method" title="#error ($stdin) (instance method)">#<strong>error ($stdin)</strong>($stdin)  &#x21d2; IO, String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#error+($stdin)-instance_method" title="TAGF::UI::Controls#error ($stdin) (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>IO stream to which we send error messages and exception reports.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file-instance_method" title="#file (instance method)">#<strong>file</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#file-instance_method" title="TAGF::UI::Controls#file (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of input file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#heredoc-instance_method" title="#heredoc (instance method)">#<strong>heredoc</strong>  &#x21d2; HereDoc<sup>?</sup> </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#heredoc-instance_method" title="TAGF::UI::Controls#heredoc (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Particulars of the most recent (or current) here-doc processed.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#input+($stdin)-instance_method" title="#input ($stdin) (instance method)">#<strong>input ($stdin)</strong>($stdin)  &#x21d2; IO, String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#input+($stdin)-instance_method" title="TAGF::UI::Controls#input ($stdin) (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>IO stream from which we read for the current context.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inputmethod-instance_method" title="#inputmethod (instance method)">#<strong>inputmethod</strong>  &#x21d2; InputMethod </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#inputmethod-instance_method" title="TAGF::UI::Controls#inputmethod (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Instance of the class that will be used to read from the input stream in this context.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#interface-instance_method" title="#interface (instance method)">#<strong>interface</strong>  &#x21d2; Interface </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Reference to the interface which is the parent of this context instance.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#klassname-instance_method" title="#klassname (instance method)">#<strong>klassname</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#klassname-instance_method" title="TAGF::Mixin::UniversalMethods#klassname (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the receiver's classname as a string, with all namespacing elements removed so it's just the unqualified portion.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lines-instance_method" title="#lines (instance method)">#<strong>lines</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#lines-instance_method" title="TAGF::UI::Controls#lines (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Array of input lines stored as history.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output+($stdout)-instance_method" title="#output ($stdout) (instance method)">#<strong>output ($stdout)</strong>($stdout)  &#x21d2; IO, String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#output+($stdout)-instance_method" title="TAGF::UI::Controls#output ($stdout) (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>IO stream to which we send normal output, such as prompts, reports, descriptions, <em>&amp;c.</em>.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pathname-instance_method" title="#pathname (instance method)">#<strong>pathname</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#pathname-instance_method" title="TAGF::UI::Controls#pathname (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prompt-instance_method" title="#prompt (instance method)">#<strong>prompt</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#prompt-instance_method" title="TAGF::UI::Controls#prompt (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Prompt used when requesting input in this context.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#propagate_history+(true)-instance_method" title="#propagate_history (true) (instance method)">#<strong>propagate_history (true)</strong>(true)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#propagate_history+(true)-instance_method" title="TAGF::UI::Controls#propagate_history (true) (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>When a new context is pushed, it can either start a new list of recorded lines, or it can.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rw-instance_method" title="#rw (instance method)">#<strong>rw</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#rw-instance_method" title="TAGF::UI::Controls#rw (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strip-instance_method" title="#strip (instance method)">#<strong>strip</strong>  &#x21d2; Object </a>
+    
+
+    
+      (also: #strip?)
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#strip-instance_method" title="TAGF::UI::Controls#strip (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Boolean flag indicating whether input lines should have leading and trailing whitespace removed.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strip_leading-instance_method" title="#strip_leading (instance method)">#<strong>strip_leading</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#strip_leading-instance_method" title="TAGF::UI::Controls#strip_leading (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Boolean flag indicating whether input lines should have leading whitespace removed after reading and before processing or storage.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strip_trailing-instance_method" title="#strip_trailing (instance method)">#<strong>strip_trailing</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#strip_trailing-instance_method" title="TAGF::UI::Controls#strip_trailing (method)">Controls</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Boolean flag indicating whether input lines should have <em>trailing</em> whitespace removed after reading and before processing or storage.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#_inivaluate_args-instance_method" title="#_inivaluate_args (instance method)">#<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; Hash{Symbol=&gt;Any} </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#_inivaluate_args-instance_method" title="TAGF::Mixin::UniversalMethods#_inivaluate_args (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of <em>keysym:inival</em> tuples built from merging the <em>kwargs</em> hash onto the one constructed from the <em>args</em> array and the <em>default</em> value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clone-instance_method" title="#clone (instance method)">#<strong>clone</strong>  &#x21d2; Context </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a deep copy of the receiver (a Context object).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#controls-instance_method" title="#controls (instance method)">#<strong>controls</strong>(obj)  &#x21d2; Hash&lt;Symbol=&gt;Object&gt; </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#controls-instance_method" title="TAGF::UI::Controls#controls (method)">Controls</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Collect the values of any attributes of <code>rcvr</code> that are mentioned in the <span class='object_link'><a href="../UI.html#KWSYMS-constant" title="TAGF::UI::KWSYMS (constant)">KWSYMS</a></span> list into a hash; basically, save the receiver's current control settings.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#decompose_attrib-instance_method" title="#decompose_attrib (instance method)">#<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; OpenStruct </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#decompose_attrib-instance_method" title="TAGF::Mixin::UniversalMethods#decompose_attrib (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a symbolic attribute name and potentially a default value, return a structure containing fields for the various things needed to define methods dealing with it (String name, instance-variable symbol, attribute with suffices like <code>!</code>, <code>?</code>, <code>=</code>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#false-instance_method" title="#false (instance method)">#<strong>false</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#false-instance_method" title="TAGF::UI::Controls#false (method)">Controls</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Boolean flag indicating whether we're currently reading lines of a here-doc.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#game_options%3F-instance_method" title="#game_options? (instance method)">#<strong>game_options?</strong>(option, *args)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#game_options%3F-instance_method" title="TAGF::Mixin::UniversalMethods#game_options? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check to see whether one or more game options are currently enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#heredoc%3F-instance_method" title="#heredoc? (instance method)">#<strong>heredoc?</strong>(input)  &#x21d2; HereDoc, false </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Method used to check whether a line of input starts a <code>here-document</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(*args, **kwargs)  &#x21d2; Context </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Constructor for Context class instances.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_game_element%3F-instance_method" title="#is_game_element? (instance method)">#<strong>is_game_element?</strong>(target)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#is_game_element%3F-instance_method" title="TAGF::Mixin::UniversalMethods#is_game_element? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return <code>true</code> if the given object is a game element — that is, its eigenclass has included (or been extended by) the TAGF::Mixin::Element module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loadable_fields-instance_method" title="#loadable_fields (instance method)">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+      (also: #abstracted_fields)
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#loadable_fields-instance_method" title="TAGF::Mixin::UniversalMethods#loadable_fields (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of field names built from concatenating values of the constant from the receiver class and all of its ancestors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#merge_controls-instance_method" title="#merge_controls (instance method)">#<strong>merge_controls</strong>(rcvr, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#merge_controls-instance_method" title="TAGF::UI::Controls#merge_controls (method)">Controls</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Severl TAGF::UI classes share the same set of control settings, allowing more specific uses to override 'defaults' set for objects farther up the call tree.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mutate-instance_method" title="#mutate (instance method)">#<strong>mutate</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Clone the current context and merge in any modified settings passed in kwargs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pluralise-instance_method" title="#pluralise (instance method)">#<strong>pluralise</strong>(word, number = 1)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#pluralise-instance_method" title="TAGF::Mixin::UniversalMethods#pluralise (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a word (presumably a singular noun) and a count, return the plural of the word if the count justifies it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raise_exception-instance_method" title="#raise_exception (instance method)">#<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#raise_exception-instance_method" title="TAGF::Mixin::UniversalMethods#raise_exception (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Either uses a passed exception or creates a new exception object according to the <code>exc_object</code> parameter, edits the backtrace to remove the appropriate number of stack frames, and raises it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read-instance_method" title="#read (instance method)">#<strong>read</strong>(*args, **kwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>'Smart' method for reading from the input stream.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strip!-instance_method" title="#strip! (instance method)">#<strong>strip!</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#strip!-instance_method" title="TAGF::UI::Controls#strip! (method)">Controls</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>def strip=(val).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#symbolise_kwargs-instance_method" title="#symbolise_kwargs (instance method)">#<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; Hash&lt;Symbol=&gt;Any&gt; </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#symbolise_kwargs-instance_method" title="TAGF::Mixin::UniversalMethods#symbolise_kwargs (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translate a hash into one with all-symbolic keys, according to standard <code>**kwargs</code> semantics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#true-instance_method" title="#true (instance method)">#<strong>true</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Controls.html#true-instance_method" title="TAGF::UI::Controls#true (method)">Controls</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Boolean flag indicating whether input lines should be checked for here-doc header signatures.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#truthify-instance_method" title="#truthify (instance method)">#<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../Mixin/UniversalMethods.html#truthify-instance_method" title="TAGF::Mixin::UniversalMethods#truthify (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert a value (string, numeric, any kind of object) into a Boolean.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(*args, **kwargs)  &#x21d2; <tt><span class='object_link'><a href="" title="TAGF::UI::Context (class)">Context</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Constructor for Context class instances.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>([])</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>({})</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:echo</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:transcribe</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:record</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:raise_on_eof</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:strip_leading</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:strip_trailing</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:allow_heredoc</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:in_heredoc</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>false</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:heredoc</span>
+          <span class="type">(<tt><span class='object_link'><a href="HereDoc.html" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:prompt</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>&quot;&gt; &quot;</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:completion_proc</span>
+          <span class="type">(<tt>Proc</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:propagate_history</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:lines</span>
+          <span class="type">(<tt>Array&lt;String&gt;</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>[]</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>Name (or instance) of the input method class that should be
+instantiated to handle actually reading from the input source.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:inputmethod</span>
+          <span class="type">(<tt><span class='object_link'><a href="InputMethod.html" title="TAGF::UI::InputMethod (class)">InputMethod</a></span></tt>, <tt>String</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:file</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:pathname</span>
+          <span class="type">(<tt>String</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>nil</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>String to use when rendering the stream's path for human
+consumption.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:context</span>
+          <span class="type">(<tt><span class='object_link'><a href="" title="TAGF::UI::Context (class)">Context</a></span></tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>&lt;b&gt;Ignored for Context and Interface objects&lt;/b&gt;
+&lt;b&gt;REQUIRED.&lt;/b&gt;
+Interface context to use.  Contains relevant details such as
+the current prompt</tt>, <tt>whether to echo input</tt>, <tt>&lt;em&gt;&amp;c.&lt;/em&gt;</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'><p><b>Ignored for Context and Interface objects</b>
+<b>REQUIRED.</b>
+Interface context to use.  Contains relevant details such as
+the current prompt, whether to echo input, <em>&amp;c.</em></p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:input</span>
+          <span class="type">(<tt>String</tt>, <tt>IO</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>$stdin</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:output</span>
+          <span class="type">(<tt>String</tt>, <tt>IO</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>$stdout</tt>
+            
+          </span>
+          
+        </li>
+      
+        <li>
+          <span class="name">:error</span>
+          <span class="type">(<tt>String</tt>, <tt>IO</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>$stderr</tt>
+            
+          </span>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 802</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_settings'>settings</span>	<span class='op'>=</span> <span class='const'><span class='object_link'><a href="../UI.html#KWSYMS-constant" title="TAGF::UI::KWSYMS (constant)">KWSYMS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_settings'>settings</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_kw'>kw</span><span class='comma'>,</span><span class='id identifier rubyid_val'>val</span><span class='op'>|</span>
+    <span class='id identifier rubyid_kivar'>kivar</span>		<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>@%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_kw'>kw</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+    <span class='id identifier rubyid_ksetter'>ksetter</span>	<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s=</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_kw'>kw</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+    <span class='comment'>#
+</span>    <span class='comment'># The inputmethod attribute is specified as a string.
+</span>    <span class='comment'>#
+</span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_kw'>kw</span> <span class='op'>==</span> <span class='symbol'>:inputmethod</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+      <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="InputMethod.html" title="TAGF::UI::InputMethod (class)">InputMethod</a></span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='id identifier rubyid_kw'>kw</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span>
+      <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='kw'>begin</span>
+          <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='id identifier rubyid_kw'>kw</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../UI.html" title="TAGF::UI (module)">UI</a></span></span><span class='period'>.</span><span class='id identifier rubyid_const_get'>const_get</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+        <span class='kw'>rescue</span> <span class='const'>NameError</span>
+          <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='comma'>,</span>
+                          <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown input method %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                                 <span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+      <span class='kw'>else</span>
+        <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='comma'>,</span>
+                        <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown input method %s:%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                               <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+                               <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Skip to the next keyword.
+</span>      <span class='comment'>#
+</span>      <span class='kw'>next</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_ksetter'>ksetter</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_ksetter'>ksetter</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='id identifier rubyid_kivar'>kivar</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># The interface is required, and must be an Interface
+</span>  <span class='comment'># instance.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>unless</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_iface'>iface</span> <span class='op'>=</span> <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:interface</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Interface.html" title="TAGF::UI::Interface (class)">Interface</a></span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:interface</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='comma'>,</span>
+                      <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>interface keyword is required </span><span class='tstring_end'>&#39;</span></span> \
+                             <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>for class %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                             <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'>ArgumentError</span><span class='comma'>,</span>
+                      <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>interface keyword value </span><span class='tstring_end'>&#39;</span></span> \
+                             <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>must be an instance of </span><span class='tstring_end'>&#39;</span></span> \
+                             <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Interface: %s:%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                             <span class='id identifier rubyid_iface'>iface</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span>
+                             <span class='id identifier rubyid_iface'>iface</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Settings propagated and ready for final processing.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:context</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>self</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_imclass'>imclass</span> <span class='op'>=</span> <span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:inputmethod</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_inputmethod'>inputmethod</span> <span class='op'>=</span> <span class='id identifier rubyid_imclass'>imclass</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_settings'>settings</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_settings'>settings</span><span class='lbracket'>[</span><span class='symbol'>:file</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_inputmethod'>inputmethod</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ViaFile.html" title="TAGF::UI::ViaFile (class)">ViaFile</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ViaFile.html#initialize-instance_method" title="TAGF::UI::ViaFile#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_settings'>settings</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_tty?'>tty?</span><span class='rparen'>)</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_inputmethod'>inputmethod</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="ViaReadline.html" title="TAGF::UI::ViaReadline (class)">ViaReadline</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ViaReadline.html#initialize-instance_method" title="TAGF::UI::ViaReadline#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_settings'>settings</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='const'>RuntimeError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>can&#39;t determine input type</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="completion_proc=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="completion_proc-instance_method">
+  
+    #<strong>completion_proc</strong>  &#x21d2; <tt>Proc</tt>, ... 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#completion_proc-instance_method" title="TAGF::UI::Controls#completion_proc (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Proc or method object that should be used to handle completion
+checking and processing when reading input interactively.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Proc</tt>, <tt>Method</tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>either the object that should be used by the Readline
+library to process completions, or <code>nil</code> if completion
+isn't enabled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="error ($stdin)=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="error ($stdin)-instance_method">
+  
+    #<strong>error ($stdin)</strong>($stdin)  &#x21d2; <tt>IO</tt>, <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#error+($stdin)-instance_method" title="TAGF::UI::Controls#error ($stdin) (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>IO stream to which we send error messages and exception
+reports.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>IO</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="file=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="file-instance_method">
+  
+    #<strong>file</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#file-instance_method" title="TAGF::UI::Controls#file (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns name of input file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>name of input file</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="heredoc=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="heredoc-instance_method">
+  
+    #<strong>heredoc</strong>  &#x21d2; <tt><span class='object_link'><a href="HereDoc.html" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></tt><sup>?</sup> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#heredoc-instance_method" title="TAGF::UI::Controls#heredoc (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Particulars of the most recent (or current) here-doc
+processed.  Here-docs are more complicated than simple one-off
+input lines, so we use a more complex storage tool for them.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HereDoc.html" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></tt>, <tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the HereDoc object currently being processed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="input ($stdin)=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="input ($stdin)-instance_method">
+  
+    #<strong>input ($stdin)</strong>($stdin)  &#x21d2; <tt>IO</tt>, <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#input+($stdin)-instance_method" title="TAGF::UI::Controls#input ($stdin) (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>IO stream from which we read for the current context.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>IO</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="inputmethod=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="inputmethod-instance_method">
+  
+    #<strong>inputmethod</strong>  &#x21d2; <tt><span class='object_link'><a href="InputMethod.html" title="TAGF::UI::InputMethod (class)">InputMethod</a></span></tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#inputmethod-instance_method" title="TAGF::UI::Controls#inputmethod (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Instance of the class that will be used to read from the input
+stream in this context.  Supported values are any object that
+subclasses TAGF::UI::InputMethod.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InputMethod.html" title="TAGF::UI::InputMethod (class)">InputMethod</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="interface-instance_method">
+  
+    #<strong>interface</strong>  &#x21d2; <tt><span class='object_link'><a href="Interface.html" title="TAGF::UI::Interface (class)">Interface</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Reference to the interface which is the parent of this context
+instance.  The interface object holds things which are truly
+global to the input reading call chain — such as the named
+history buffers.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Interface.html" title="TAGF::UI::Interface (class)">Interface</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+771
+772
+773</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 771</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_interface'>interface</span>
+  <span class='ivar'>@interface</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="klassname-instance_method">
+  
+    #<strong>klassname</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#klassname-instance_method" title="TAGF::Mixin::UniversalMethods#klassname (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the receiver's classname as a string, with all
+namespacing elements removed so it's just the unqualified
+portion.  <em>E.g.</em>, an invocation by an object of class
+<code>TAGF::Exceptions::DummyError</code> would return <code>DummyError</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="lines-instance_method">
+  
+    #<strong>lines</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#lines-instance_method" title="TAGF::UI::Controls#lines (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Array of input lines stored as history.  New lines are pushed
+on the end.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="output ($stdout)=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="output ($stdout)-instance_method">
+  
+    #<strong>output ($stdout)</strong>($stdout)  &#x21d2; <tt>IO</tt>, <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#output+($stdout)-instance_method" title="TAGF::UI::Controls#output ($stdout) (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>IO stream to which we send normal output, such as prompts,
+reports, descriptions, <em>&amp;c.</em></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>IO</tt>, <tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="pathname=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="pathname-instance_method">
+  
+    #<strong>pathname</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#pathname-instance_method" title="TAGF::UI::Controls#pathname (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="prompt=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="prompt-instance_method">
+  
+    #<strong>prompt</strong>  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#prompt-instance_method" title="TAGF::UI::Controls#prompt (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Prompt used when requesting input in this context.  New ones
+are pushed when read context changes (such as reading lines of
+a here-doc), and popped when that reverts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the current prompt string</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id="propagate_history (true)=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="propagate_history (true)-instance_method">
+  
+    #<strong>propagate_history (true)</strong>(true)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#propagate_history+(true)-instance_method" title="TAGF::UI::Controls#propagate_history (true) (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>When a new context is pushed, it can either start a new list
+of recorded lines, or it can</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if any existing history should be passed along when
+we push a new context.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="rw-instance_method">
+  
+    #<strong>rw</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#rw-instance_method" title="TAGF::UI::Controls#rw (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>file</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+    
+      
+      <span id="strip=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="strip-instance_method">
+  
+    
+      <span class="overload">#<strong>strip</strong>  &#x21d2; <tt>Boolean</tt> </span>
+    
+      <span class="overload">#<strong>strip?</strong>  &#x21d2; <tt>Boolean</tt> </span>
+    
+      <span class="overload">#<strong>strip!</strong>  &#x21d2; <tt>Boolean</tt> </span>
+    
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='strip?-instance_method'>strip?</span></span>
+    </span>
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#strip-instance_method" title="TAGF::UI::Controls#strip (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Boolean flag indicating whether input lines should have
+leading and trailing whitespace removed.  Sets or clears both
+the #strip_leading and #strip_trailing attributes together.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>strip</strong>  &#x21d2; <tt>Boolean</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Returns whether both leading and trailing whitespace should be
+removed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether both leading and trailing whitespace should be
+removed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>strip?</strong>  &#x21d2; <tt>Boolean</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Returns whether both leading and trailing whitespace should be
+removed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whether both leading and trailing whitespace should be
+removed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>strip!</strong>  &#x21d2; <tt>Boolean</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>the #strip_trailing attributes are unconditionally set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code>, as both of the #strip_leading and</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+      </li>
+    
+  </ul>
+
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Controls.html#strip_leading-instance_method" title="TAGF::UI::Controls#strip_leading (method)">#strip_leading</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip_trailing-instance_method" title="TAGF::UI::Controls#strip_trailing (method)">#strip_trailing</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      
+      <span id="strip_leading=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="strip_leading-instance_method">
+  
+    #<strong>strip_leading</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#strip_leading-instance_method" title="TAGF::UI::Controls#strip_leading (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Boolean flag indicating whether input lines should have
+leading whitespace removed after reading and before processing
+or storage.
+@ ! macro doc.TAGF.classmethod.flag.invoke</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Controls.html#strip_trailing-instance_method" title="TAGF::UI::Controls#strip_trailing (method)">#strip_trailing</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip-instance_method" title="TAGF::UI::Controls#strip (method)">#strip</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      
+      <span id="strip_trailing=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="strip_trailing-instance_method">
+  
+    #<strong>strip_trailing</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#strip_trailing-instance_method" title="TAGF::UI::Controls#strip_trailing (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Boolean flag indicating whether input lines should have
+<em>trailing</em> whitespace removed after reading and before
+processing or storage.
+@ ! macro doc.TAGF.classmethod.flag.invoke</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Controls.html#strip_leading-instance_method" title="TAGF::UI::Controls#strip_leading (method)">#strip_leading</a></span></li>
+    
+      <li><span class='object_link'><a href="Controls.html#strip-instance_method" title="TAGF::UI::Controls#strip (method)">#strip</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_inivaluate_args-instance_method">
+  
+    #<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; <tt>Hash{Symbol=&gt;Any}</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#_inivaluate_args-instance_method" title="TAGF::Mixin::UniversalMethods#_inivaluate_args (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(nil)
+Whatever default value should be supplied for attributes
+listed in the <code>args</code> array.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) array of attribute identifiers.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) hash of <em>keysym:inival</em> tuples.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>inival</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>allows an attribute declarator to perform validity checks or
+transformations on the initial values (such as ensuring they
+are all of a particular class (<em>e.g.</em>, <code>TrueClass</code> or
+<code>FalseClass</code> for a Boolean attribute).</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>inival</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>each <em>inival</em> in turn.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Returns:</p>
+<ul class="yieldreturn">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever tranformation, if any, the block performs on the
+<em>inival</em>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="clone-instance_method">
+  
+    #<strong>clone</strong>  &#x21d2; <tt><span class='object_link'><a href="" title="TAGF::UI::Context (class)">Context</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a deep copy of the receiver (a Context object).  All
+known attributes are read through the instance variable
+methods (to avoid accessor side-effects) and in a hash, which
+is passed to the constructor.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="TAGF::UI::Context (class)">Context</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a new Context object with the same attribute values as the
+caller.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 975</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clone'>clone</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Hash up the settings of the current context.  Use the
+</span>  <span class='comment'># instance-variable syntax as opposed to the attribute-getter
+</span>  <span class='comment'># on to avoid any side-effects or accessor-less controls.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_ckwargs'>ckwargs</span>		<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_controls'>controls</span>
+  <span class='id identifier rubyid_nu_me'>nu_me</span>		<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_ckwargs'>ckwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_nu_me'>nu_me</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="controls-instance_method">
+  
+    #<strong>controls</strong>(obj)  &#x21d2; <tt>Hash&lt;Symbol=&gt;Object&gt;</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#controls-instance_method" title="TAGF::UI::Controls#controls (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Collect the values of any attributes of <code>rcvr</code> that are
+mentioned in the <span class='object_link'><a href="../UI.html#KWSYMS-constant" title="TAGF::UI::KWSYMS (constant)">KWSYMS</a></span> list into a hash; basically, save
+the receiver's current control settings.</p>
+
+<p>The list of attributes to process can be modified by two
+constants that might be declared in the receiver's class:</p>
+
+<dl>
+<dt>* <code>CONTROLS_ADD</code></dt>
+<dd>an array of symbols identifying attributes
+that aren't included in KWSYMS but are specific to the
+declaring class, and should be included in the collection</dd>
+<dt>* <code>CONTROLS_OMIT</code></dt>
+<dd>an array of symbols identifying attributes that
+<em>might</em> be included in KWSYMS and <em>might</em> be
+valid for the receiver, which should nevertheless not be
+included in the collection.</dd>
+</dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(self)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decompose_attrib-instance_method">
+  
+    #<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; <tt>OpenStruct</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#decompose_attrib-instance_method" title="TAGF::Mixin::UniversalMethods#decompose_attrib (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Given a symbolic attribute name and potentially a default
+value, return a structure containing fields for the various
+things needed to define methods dealing with it
+(String name, instance-variable symbol, attribute with
+suffices like <code>!</code>, <code>?</code>, <code>=</code>).  Any non-alphanumeric,
+non-underscore characters are silently stripped before the
+name is processed.</p>
+
+<p>See the return value for details of the returned structure.</p>
+
+<pre class="code ruby"><code class="ruby">    default:    The default value from this method invocation;
+                default `nil`
+    str:        The base attribute name as a String
+    attrib:     The base attribute name as a Symbol
+    getter:     (Same as :attrib field)
+    setter:     The symbolic attribute name with a `=` suffix
+    query:      The symbolic attribute name with a `?` suffix
+    bang:       The symbolic attribute name with a `!` suffix
+    ivar:       The symbolic name for the corresponding
+                instance variable (_e.g._, `:@&lt;attrib_p&gt;`)
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attrib_p</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>OpenStruct</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Fields in the structure are:</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="false-instance_method">
+  
+    #<strong>false</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#false-instance_method" title="TAGF::UI::Controls#false (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Boolean flag indicating whether we're currently reading lines
+of a here-doc.  When true, input lines are checked for the
+here-doc terminator, and new here-docs are not allowed (or,
+rather, are treated as just normal text).
+@ ! macro doc.TAGF.classmethod.flag.invoke</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if the input processor is in the middle of readine a
+here-doc.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="game_options?-instance_method">
+  
+    #<strong>game_options?</strong>(option, *args)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#game_options%3F-instance_method" title="TAGF::Mixin::UniversalMethods#game_options? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check to see whether one or more game options are currently
+enabled.  If any arguments aren't recognised as game options,
+a warning is sent to <code>stderr</code> and that argument is ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>option</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if <strong>all</strong> of the requested options are currently
+enabled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="heredoc?-instance_method">
+  
+    #<strong>heredoc?</strong>(input)  &#x21d2; <tt><span class='object_link'><a href="HereDoc.html" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></tt>, <tt><span class='object_link'><a href="Controls.html#false-instance_method" title="TAGF::UI::Controls#false (method)">false</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Method used to check whether a line of input starts a
+<code>here-document</code>.  Primarily intended for use by the
+administrator command-line and scripting tools, it either
+returns <code>false</code> if there's no <code>here-doc</code> indicator, or a
+structure for use in processing the <code>here-doc</code> text lines that
+follow.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>input</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A line of text to be checked for a <code>here-document</code> opener.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="HereDoc.html" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></tt>, <tt><span class='object_link'><a href="Controls.html#false-instance_method" title="TAGF::UI::Controls#false (method)">false</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><ul>
+<li>If the last word (as defined by the shell) of the input
+parameter <strong>does not</strong> match a valid
+<code>here-doc</code> terminator pattern, this method returns
+<code>false</code>.</li>
+<li><p>If the last word <strong>does</strong> is a valid
+<code>here-doc</code> terminator, the return value is a structure
+with the following attributes:</p>
+
+<ul>
+<li><code>.interpolate</code> [Boolean]
+(Not currently used.)  Indicates whether the final value
+of the <code>here-doc</code> should be subjected to variable
+interpolation or other post-processing.  If <code>false</code>, it
+should be treated as a raw string.</li>
+<li><code>.delimiter_re</code> [Reqexp]
+A regular expression identifying the format of a line
+terminating the <code>here-doc</code> text.  It matches the
+<em>entire</em> line, so no pre-parsing is necessary.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RuntimeError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The <code>here-doc</code> termination string was invalid, either in
+outright composition or possibly by having mismatched
+quotation marks.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Here_Documents</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 1020</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_heredoc?'>heredoc?</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_words'>words</span>		<span class='op'>=</span> <span class='const'>Shellwords</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='id identifier rubyid_input'>input</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_words'>words</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>&lt;&lt;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span> <span class='op'>=</span> <span class='id identifier rubyid_words'>words</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='const'>HEREDOC_RE</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Doesn&#39;t match our allowed pattern.  Don&#39;t explain why.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='const'>RuntimeError</span><span class='comma'>,</span>
+            <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invalid here-doc suffix syntax: %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                   <span class='id identifier rubyid_words'>words</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='comment'>#
+</span>    <span class='comment'># We have a here-doc suffix that matches the pattern..
+</span>    <span class='comment'>#
+</span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_captures'>captures</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_captures'>captures</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># .. except the &#39;&lt;&lt;{word}&#39; was quoted incorrectly.  Bzzzt!
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_raise'>raise</span><span class='lparen'>(</span><span class='const'>RuntimeError</span><span class='comma'>,</span>
+            <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>invalid here-suffix </span><span class='tstring_end'>&#39;</span></span> \
+                   <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>(mismatched quotes): %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                   <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_captures'>captures</span><span class='period'>.</span><span class='id identifier rubyid_inxpect'>inxpect</span>
+                  <span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_result'>result</span>	<span class='op'>=</span> <span class='const'><span class='object_link'><a href="HereDoc.html" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="HereDoc.html#initialize-instance_method" title="TAGF::UI::HereDoc#initialize (method)">new</a></span></span><span class='lparen'>(</span>
+      <span class='label'>intro_line:</span>		<span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='comma'>,</span>
+      <span class='label'>prefix:</span>		<span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>&lt;&lt;.*</span><span class='regexp_end'>!</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_chomp'>chomp</span><span class='comma'>,</span>
+      <span class='label'>interpolate:</span>	<span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_captures'>captures</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='label'>delimiter:</span>		<span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_captures'>captures</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='comma'>,</span>
+      <span class='label'>delimiter_re:</span>	<span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>raw:</span>		<span class='kw'>nil</span><span class='comma'>,</span>
+      <span class='label'>lines:</span>		<span class='lbracket'>[</span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>
+    <span class='id identifier rubyid_pre_re'>pre_re</span>	<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>^%s%s$</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                           <span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_captures'>captures</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>-</span><span class='tstring_end'>&#39;</span></span> \
+                            <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\s*</span><span class='tstring_end'>&#39;</span></span> \
+                            <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+                           <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_escape'>escape</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_captures'>captures</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_delimiter_re'>delimiter_re</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_pre_re'>pre_re</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+  <span class='kw'>end</span>                     <span class='comment'># if (words.last[0,2] == &#39;&lt;&lt;&#39;)
+</span>  <span class='kw'>return</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_game_element?-instance_method">
+  
+    #<strong>is_game_element?</strong>(target)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#is_game_element%3F-instance_method" title="TAGF::Mixin::UniversalMethods#is_game_element? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return <code>true</code> if the given object is a game element — that is,
+its eigenclass has included (or been extended by) the
+TAGF::Mixin::Element module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loadable_fields-instance_method">
+  
+    
+      <span class="overload">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+      <span class="overload">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='abstracted_fields-instance_method'>abstracted_fields</span></span>
+    </span>
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#loadable_fields-instance_method" title="TAGF::Mixin::UniversalMethods#loadable_fields (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Look at the constant <code>Loadable_Fields</code> for the receiver
+class and all of its ancestors, and return an array of all
+unique values therein.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Same as #loadable_fields save that it uses the
+<code>Abstracted_Fields</code> constants instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+  </ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rcvr</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(self)
+Class (or object whose class should be used) for which the
+list of fields should be derived.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="merge_controls-instance_method">
+  
+    #<strong>merge_controls</strong>(rcvr, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#merge_controls-instance_method" title="TAGF::UI::Controls#merge_controls (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Severl TAGF::UI classes share the same set of control
+settings, allowing more specific uses to override 'defaults'
+set for objects farther up the call tree.  This method allows</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rcvr</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(self)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>See <span class='object_link'><a href="../UI.html#KWSYMS-constant" title="TAGF::UI::KWSYMS (constant)">KWSYMS</a></span> for the possible keywords and their
+significance.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a hash of control settings in which those passed in the
+<code>kwargs</code> actual override the current object's values.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="mutate-instance_method">
+  
+    #<strong>mutate</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Clone the current context and merge in any modified settings
+passed in kwargs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 948</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_mutate'>mutate</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_mutant'>mutant</span>		<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
+  <span class='id identifier rubyid_ccontrols'>ccontrols</span>	<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_controls'>controls</span>
+  <span class='id identifier rubyid_ccontrols'>ccontrols</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_kw'>kw</span><span class='comma'>,</span><span class='id identifier rubyid_val'>val</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../UI.html#KWSYMS-constant" title="TAGF::UI::KWSYMS (constant)">KWSYMS</a></span></span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_kw'>kw</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_kwivar'>kwivar</span>	<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>@%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_kw'>kw</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+      <span class='id identifier rubyid_mutant'>mutant</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='id identifier rubyid_kwivar'>kwivar</span><span class='comma'>,</span> <span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>not mutating unknown attribute %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                  <span class='id identifier rubyid_kw'>kw</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>                     <span class='comment'># ccontrols.each do
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All of the receiver&#39;s control attribute values have been
+</span>  <span class='comment'># copied to the new instance.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_mutant'>mutant</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pluralise-instance_method">
+  
+    #<strong>pluralise</strong>(word, number = 1)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#pluralise-instance_method" title="TAGF::Mixin::UniversalMethods#pluralise (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>At the moment, only English (<code>en</code>) words are supported.</p>
+</div>
+  </div>
+
+<p>Given a word (presumably a singular noun) and a count, return
+the plural of the word if the count justifies it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>word</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>either the original word, or the deduced plural if the
+<code>number</code> argument was an integer 1.  (Floats <em>always</em>
+use plurals, even if they're <code>1.000</code>.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="raise_exception-instance_method">
+  
+    #<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#raise_exception-instance_method" title="TAGF::Mixin::UniversalMethods#raise_exception (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p><p>Either uses a passed exception or creates a new exception
+object according to the <code>exc_object</code> parameter, edits the
+backtrace to remove the appropriate number of stack frames,
+and raises it.</p>
+
+<p>Acceptable values for <code>exc_object</code> are any of the following:</p>
+
+<dl>
+<dt>1. a string</dt>
+<dd>a new <code>RuntimeError</code> exception is created from the
+ string.  <code>args</code> is ignored.</dd>
+<dt>2. an exception object</dt>
+<dd>the object is raised as is.  <code>args</code> is ignored.</dd>
+<dt>3. an exception class</dt>
+<dd>a new exception object is created from this constructor.
+ <code>args</code> is passed to the constructor, and <code>kwargs</code> as well
+ if <code>exc_object</code> is a descendant of
+ <span class='object_link'><a href="../Exceptions/ErrorBase.html" title="TAGF::Exceptions::ErrorBase (class)">Exceptions::ErrorBase</a></span>.</dd>
+<dt>4. a callable object that returns one of the above</dt>
+<dd>anything that responds to the <code>:call</code> method falls into
+ this category.  It will be invoked with <code>.call(*args)</code>.
+ <code>kwargs</code> isn't passed.</dd>
+</dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>exc_object</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Class</tt>, <tt>Exception</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string (converted to a <code>RuntimeError</code> exception), an
+exception class, an actual exception, or a <code>Proc</code> that
+returns one of the above.  See the method description.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of arguments to pass to any exception constructor
+invoked.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of keyword arguments to pass to the constructor,
+possibly with the <code>:levels</code> keyword which will be consumed
+by this method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:levels</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>1</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>The number of stack frames to pop off the backtrace.  The
+default is 1, meaning that the caller's caller will appear
+to be the location raising the exception.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/NotExceptional.html" title="TAGF::Exceptions::NotExceptional (class)">TAGF::Exceptions::NotExceptional</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>NotExceptional</code> exception is if the argument wasn't a
+string, an exception instance, an exception class, or a proc
+that (eventually) returns an exception class or instance.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever valid exception was derived from the arguments.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read-instance_method">
+  
+    #<strong>read</strong>(*args, **kwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>'Smart' method for reading from the input stream.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/ui.rb', line 873</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_text'>text</span>		<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_inputmethod'>inputmethod</span><span class='period'>.</span><span class='id identifier rubyid_gets'>gets</span>
+  <span class='comment'>#
+</span>  <span class='comment'># If we seem to be at EOF, just exit.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_text'>text</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Here-doc processing is involved, so let&#39;s check for the
+</span>  <span class='comment'># simplest case (no here-docs) and get it out of the way.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>unless</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_allow_heredoc?'>allow_heredoc?</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_hdinfo'>hdinfo</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_heredoc?'>heredoc?</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>case</span><span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_strip?'>strip?</span>
+      <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_strip!'>strip!</span>
+    <span class='kw'>when</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_strip_leading?'>strip_leading?</span>
+      <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_lstrip!'>lstrip!</span>
+    <span class='kw'>when</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_strip_trailing?'>strip_trailing?</span>
+      <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_rstrip!'>rstrip!</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_text'>text</span>
+  <span class='kw'>end</span>                     <span class='comment'># unless (self.allow_heredoc? &amp;&amp; self.heredoc?(text))
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Okey, we&#39;re starting a here-doc.  `hdinfo` is a {HereDoc}
+</span>  <span class='comment'># object that has been preloaded with much of the information.
+</span>  <span class='comment'>#
+</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Here is where we read the here-doc lines.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_save_prompt'>save_prompt</span>	<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_prompt'>prompt</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_prompt'>prompt</span>	<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>[Heredoc:%s]&gt; </span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_hdinfo'>hdinfo</span><span class='period'>.</span><span class='id identifier rubyid_delimiter'>delimiter</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_result'>result</span>		<span class='op'>=</span> <span class='id identifier rubyid_hdinfo'>hdinfo</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_in_heredoc'>in_heredoc</span>	<span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id identifier rubyid_hdinfo'>hdinfo</span><span class='period'>.</span><span class='id identifier rubyid_raw'>raw</span>	<span class='op'>=</span> <span class='const'>String</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_catch'>catch</span><span class='lparen'>(</span><span class='symbol'>:heredoc_read</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='kw'>while</span> <span class='lparen'>(</span><span class='kw'>true</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_line'>line</span>	<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_inputmethod'>inputmethod</span><span class='period'>.</span><span class='id identifier rubyid_gets'>gets</span>
+      <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+        <span class='comment'>#
+</span>        <span class='comment'># Got EOF before reaching the here-doc termination line.
+</span>        <span class='comment'>#
+</span>        <span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_raise_on_eof?'>raise_on_eof?</span><span class='rparen'>)</span>
+          <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Exceptions/UnterminatedHeredoc.html" title="TAGF::Exceptions::UnterminatedHeredoc (class)">UnterminatedHeredoc</a></span></span><span class='comma'>,</span>
+                          <span class='id identifier rubyid_hdinfo'>hdinfo</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+        <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>EOF encountered before </span><span class='tstring_end'>&#39;</span></span> \
+                    <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>end of &quot;%s&quot; here-doc; </span><span class='tstring_end'>&#39;</span></span> \
+                    <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>any partial input discarded</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                    <span class='id identifier rubyid_hdinfo'>hdinfo</span><span class='period'>.</span><span class='id identifier rubyid_delimiter'>delimiter</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='comment'>#
+</span>        <span class='comment'># `nil` signifies that EOF was encountered.
+</span>        <span class='comment'>#
+</span>        <span class='id identifier rubyid_result'>result</span>	<span class='op'>=</span> <span class='kw'>nil</span>
+        <span class='id identifier rubyid_throw'>throw</span><span class='lparen'>(</span><span class='symbol'>:heredoc_read</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='id identifier rubyid_hdinfo'>hdinfo</span><span class='period'>.</span><span class='id identifier rubyid_delimiter_re'>delimiter_re</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='comment'>#
+</span>        <span class='comment'># We&#39;ve hit the terminator line.  Don&#39;t include it, and
+</span>        <span class='comment'># exit the loop.
+</span>        <span class='comment'>#
+</span>        <span class='id identifier rubyid_throw'>throw</span><span class='lparen'>(</span><span class='symbol'>:heredoc_read</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_hdinfo'>hdinfo</span><span class='period'>.</span><span class='id identifier rubyid_raw'>raw</span>	<span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_line'>line</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>                     <span class='comment'># catch(:heredoc_read) do
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_prompt'>prompt</span>	<span class='op'>=</span> <span class='id identifier rubyid_save_prompt'>save_prompt</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_in_heredoc'>in_heredoc</span>	<span class='op'>=</span> <span class='kw'>false</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="HereDoc.html" title="TAGF::UI::HereDoc (class)">HereDoc</a></span></span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_raw'>raw</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_lines'>lines</span>	<span class='op'>=</span> <span class='id identifier rubyid_result'>result</span><span class='period'>.</span><span class='id identifier rubyid_raw'>raw</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>%r!</span><span class='tstring_content'>\n</span><span class='regexp_end'>!</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="strip!-instance_method">
+  
+    #<strong>strip!</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#strip!-instance_method" title="TAGF::UI::Controls#strip! (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>def strip=(val)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="symbolise_kwargs-instance_method">
+  
+    #<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; <tt>Hash&lt;Symbol=&gt;Any&gt;</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#symbolise_kwargs-instance_method" title="TAGF::Mixin::UniversalMethods#symbolise_kwargs (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translate a hash into one with all-symbolic keys, according to
+standard <code>**kwargs</code> semantics.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol,String=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a copy of the <code>kwargs</code> argument with all keys converted to
+symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RuntimeError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><tt>"symbolise_kwargs kwargs keys must be Symbols or
+Strings: <em>classname</em>:<em>key</em>"</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="true-instance_method">
+  
+    #<strong>true</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Controls.html#true-instance_method" title="TAGF::UI::Controls#true (method)">Controls</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>If a here-doc is in progress, this flag is disabled;
+here-docs cannot be nested.</p>
+</div>
+  </div>
+
+<p>Boolean flag indicating whether input lines should be checked
+for here-doc header signatures.
+@ ! macro doc.TAGF.classmethod.flag.invoke</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if input lines are to check for here-doc syntax and
+processed appropriately.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Here_Documents</li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="truthify-instance_method">
+  
+    #<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../Mixin/UniversalMethods.html#truthify-instance_method" title="TAGF::Mixin::UniversalMethods#truthify (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert a value (string, numeric, any kind of object) into a
+Boolean.  This varies slightly from normal Ruby semantics in
+that an integer 0 is considered <code>false</code> whereas normal Ruby
+interpretation would consider it <code>true</code>.</p>
+
+<p>Any value which isn't represented in the list of truthy values
+is considered <code>false</code>.</p>
+
+<p>The default list of truthy values can be augmented or replaced
+by using the keyword arguments <code>:true_values</code> and <code>:replace</code>.
+See the option descriptions below.</p>
+
+<p>More involved checking can be performed by supplying a proc
+(which is what the default implementation uses).  This module
+supplies some possibly-useful string and Regexp constants.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>testvalue</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>value to evaluate for truthiness.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:true_values</span>
+          <span class="type">(<tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>An array of objects that are the only ones that will be
+considered truthy.  <em>Any more involved checking than 'is
+it one of these?' should be handled with a truthiness
+proc.</em></p>
+
+<p>This is only meaningful if <code>:truthiness_proc</code> isn't used.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:truthiness_proc</span>
+          <span class="type">(<tt>Proc</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>Proc to be called</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the evaluation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Exceptions/UncallableObject.html" title="TAGF::Exceptions::UncallableObject (class)">TAGF::Exceptions::UncallableObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the <code>:truthiness_proc</code> argument doesn't respond to the
+<code>:call</code> method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Truthy_Test_Proc</li>
+    
+      <li><span class='object_link'><a href="../Mixin/UniversalMethods.html#Truthy_Strings-constant" title="TAGF::Mixin::UniversalMethods::Truthy_Strings (constant)">Truthy_Strings</a></span></li>
+    
+      <li><span class='object_link'><a href="../Mixin/UniversalMethods.html#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></li>
+    
+      <li><span class='object_link'><a href="../Mixin/UniversalMethods.html#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span></li>
+    
+      <li><span class='object_link'><a href="../Mixin/UniversalMethods.html#Complex_String-constant" title="TAGF::Mixin::UniversalMethods::Complex_String (constant)">Complex_String</a></span></li>
+    
+      <li><span class='object_link'><a href="../Mixin/UniversalMethods.html#Integer_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Integer_String_RE (constant)">Integer_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="../Mixin/UniversalMethods.html#Float_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Float_String_RE (constant)">Float_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="../Mixin/UniversalMethods.html#Complex_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Complex_String_RE (constant)">Complex_String_RE</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Mar  1 15:35:39 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.0.5).
+</div>
+
+    </div>
+  </body>
+</html>

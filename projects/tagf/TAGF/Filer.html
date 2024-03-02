@@ -1,0 +1,4309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: TAGF::Filer
+  
+    &mdash; Text Adventure Framework (TAF) Gem
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "TAGF::Filer";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span>
+     &raquo; 
+    <span class="title">Filer</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: TAGF::Filer
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">TAGF::Filer</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  <dl>
+      <dt>Includes:</dt>
+      <dd><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span>, <span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span>, <span class='object_link'><a href="Mixin/DTypes.html" title="TAGF::Mixin::DTypes (module)">Mixin::DTypes</a></span>, <span class='object_link'><a href="Mixin/UniversalMethods.html" title="TAGF::Mixin::UniversalMethods (module)">Mixin::UniversalMethods</a></span></dd>
+  </dl>
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/tagf/filer.rb</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Class for loading game milieus, or reconstituting saved games,
+from <code>YAML</code> files.</p>
+
+<p>Some game objects include direct references, or 'contain,' others;
+for example, inventories or the connexions between locations.
+Relationships are <em>via</em> EIDs (Element IDs).  We can't put
+something into an object until the thing has been created, so we
+store all these in 'pending' lists until all the objects have been
+reified.  Then we stitch them together from the 'pending' BOM
+lists.</p>
+
+<p>What an absolutely horrible explanation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="Loadables-constant" class="">Loadables =
+          
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>faction</span><span class='tstring_end'>&#39;</span></span>         <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Faction.html" title="TAGF::Faction (class)">Faction</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>factions</span><span class='tstring_end'>&#39;</span></span>        <span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="Faction.html" title="TAGF::Faction (class)">Faction</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>feature</span><span class='tstring_end'>&#39;</span></span>         <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Feature.html" title="TAGF::Feature (class)">Feature</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>features</span><span class='tstring_end'>&#39;</span></span>        <span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="Feature.html" title="TAGF::Feature (class)">Feature</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>game</span><span class='tstring_end'>&#39;</span></span>            <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Game.html" title="TAGF::Game (class)">Game</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>item</span><span class='tstring_end'>&#39;</span></span>            <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Item.html" title="TAGF::Item (class)">Item</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>items</span><span class='tstring_end'>&#39;</span></span>           <span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="Item.html" title="TAGF::Item (class)">Item</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>keyword</span><span class='tstring_end'>&#39;</span></span>		<span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Keyword.html" title="TAGF::Keyword (class)">Keyword</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>keywords</span><span class='tstring_end'>&#39;</span></span>	<span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="Keyword.html" title="TAGF::Keyword (class)">Keyword</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>location</span><span class='tstring_end'>&#39;</span></span>        <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Location.html" title="TAGF::Location (class)">Location</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>locations</span><span class='tstring_end'>&#39;</span></span>       <span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="Location.html" title="TAGF::Location (class)">Location</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>container</span><span class='tstring_end'>&#39;</span></span>       <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Container.html" title="TAGF::Container (class)">Container</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>containers</span><span class='tstring_end'>&#39;</span></span>      <span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="Container.html" title="TAGF::Container (class)">Container</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>path</span><span class='tstring_end'>&#39;</span></span>            <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Path.html" title="TAGF::Path (class)">Path</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>paths</span><span class='tstring_end'>&#39;</span></span>           <span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="Path.html" title="TAGF::Path (class)">Path</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>npc</span><span class='tstring_end'>&#39;</span></span>             <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="NPC.html" title="TAGF::NPC (class)">NPC</a></span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>npcs</span><span class='tstring_end'>&#39;</span></span>            <span class='op'>=&gt;</span> <span class='const'>Array</span><span class='lbracket'>[</span><span class='const'><span class='object_link'><a href="NPC.html" title="TAGF::NPC (class)">NPC</a></span></span><span class='rbracket'>]</span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>player</span><span class='tstring_end'>&#39;</span></span>          <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Player.html" title="TAGF::Player (class)">Player</a></span></span><span class='comma'>,</span>
+<span class='rbrace'>}</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#elements-instance_method" title="#elements (instance method)">#<strong>elements</strong>  &#x21d2; Hash&lt;String=&gt;TAGF::Mixin::Element&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of the game element objects created by the #load_game method, keyed by their EIDs.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#elements_processed-instance_method" title="#elements_processed (instance method)">#<strong>elements_processed</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#elkey-instance_method" title="#elkey (instance method)">#<strong>elkey</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/ClassMethods.html#elkey-instance_method" title="TAGF::Mixin::ClassMethods#elkey (method)">Mixin::ClassMethods</a></span>
+    </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Name of the element key as used in definition (YAML) files.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#game-instance_method" title="#game (instance method)">#<strong>game</strong>  &#x21d2; TAGF::Game </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stores the TAGF::Game object that is being [re]loaded, for use elsewhere in the process.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#klassname-instance_method" title="#klassname (instance method)">#<strong>klassname</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#klassname-instance_method" title="TAGF::Mixin::UniversalMethods#klassname (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return the receiver's classname as a string, with all namespacing elements removed so it's just the unqualified portion.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sources-instance_method" title="#sources (instance method)">#<strong>sources</strong>  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Absolute paths to the <code>YAML</code> files associated with this load sequence.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#yamldata-instance_method" title="#yamldata (instance method)">#<strong>yamldata</strong>  &#x21d2; Hash </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Results of parsing the <code>YAML</code>-formatted data read from <code>#sources</code>.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#_inivaluate_args-instance_method" title="#_inivaluate_args (instance method)">#<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; Hash{Symbol=&gt;Any} </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#_inivaluate_args-instance_method" title="TAGF::Mixin::UniversalMethods#_inivaluate_args (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A hash of <em>keysym:inival</em> tuples built from merging the <em>kwargs</em> hash onto the one constructed from the <em>args</em> array and the <em>default</em> value.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#debugging%3F-instance_method" title="#debugging? (instance method)">#<strong>debugging?</strong>(item)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../TAGF.html#debugging%3F-instance_method" title="TAGF#debugging? (method)">TAGF</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Dummy method for debugging before any real methods are defined.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#decompose_attrib-instance_method" title="#decompose_attrib (instance method)">#<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; OpenStruct </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#decompose_attrib-instance_method" title="TAGF::Mixin::UniversalMethods#decompose_attrib (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a symbolic attribute name and potentially a default value, return a structure containing fields for the various things needed to define methods dealing with it (String name, instance-variable symbol, attribute with suffices like <code>!</code>, <code>?</code>, <code>=</code>).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#game_options%3F-instance_method" title="#game_options? (instance method)">#<strong>game_options?</strong>(option, *args)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#game_options%3F-instance_method" title="TAGF::Mixin::UniversalMethods#game_options? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Check to see whether one or more game options are currently enabled.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#invocation-instance_method" title="#invocation (instance method)">#<strong>invocation</strong>(altmethod = nil, altmessage = nil, frame = 1)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/Debugging.html#invocation-instance_method" title="TAGF::Mixin::Debugging#invocation (method)">Mixin::Debugging</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Display a method on <code>stderr</code> about a particular method or class of method beginning execution.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_game_element%3F-instance_method" title="#is_game_element? (instance method)">#<strong>is_game_element?</strong>(target)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#is_game_element%3F-instance_method" title="TAGF::Mixin::UniversalMethods#is_game_element? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Return <code>true</code> if the given object is a game element — that is, its eigenclass has included (or been extended by) the TAGF::Mixin::Element module.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_game-instance_method" title="#load_game (instance method)">#<strong>load_game</strong>(file)  &#x21d2; TAGF::Game </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Primary method for loading a game from its original definition, or a saved game.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_generic-instance_method" title="#load_generic (instance method)">#<strong>load_generic</strong>(klass, ekwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a game element from a class identifier and a set of keyword arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_Location-instance_method" title="#load_Location (instance method)">#<strong>load_Location</strong>(klass, ekwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a Location object from a set of keyword arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#loadable_fields-instance_method" title="#loadable_fields (instance method)">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+      (also: #abstracted_fields)
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#loadable_fields-instance_method" title="TAGF::Mixin::UniversalMethods#loadable_fields (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>A list of field names built from concatenating values of the constant from the receiver class and all of its ancestors.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pluralise-instance_method" title="#pluralise (instance method)">#<strong>pluralise</strong>(word, number = 1)  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#pluralise-instance_method" title="TAGF::Mixin::UniversalMethods#pluralise (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Given a word (presumably a singular noun) and a count, return the plural of the word if the count justifies it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#process_definition-instance_method" title="#process_definition (instance method)">#<strong>process_definition</strong>(klass, ekwargs)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Create a game element from a class identifier and a set of keyword arguments.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raise_exception-instance_method" title="#raise_exception (instance method)">#<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; void </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#raise_exception-instance_method" title="TAGF::Mixin::UniversalMethods#raise_exception (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Either uses a passed exception or creates a new exception object according to the <code>exc_object</code> parameter, edits the backtrace to remove the appropriate number of stack frames, and raises it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reify_elements-instance_method" title="#reify_elements (instance method)">#<strong>reify_elements</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Go through the game element objects in #elements and fill in abstracted fields containing EIDs with references to the actual objects.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reify_generic-instance_method" title="#reify_generic (instance method)">#<strong>reify_generic</strong>(obj, flist)  &#x21d2; TAGF::Mixin::Element </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Replace abstracted fields in <code>obj</code> (<em>i.e.</em>, those containing an EID rather than an object reference) with the appropriate values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reify_Location-instance_method" title="#reify_Location (instance method)">#<strong>reify_Location</strong>(obj, flist)  &#x21d2; TAGF::Mixin::Element </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Replace abstracted fields in <code>obj</code> (<em>i.e.</em>, those containing an EID rather than an object reference) with the appropriate values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reify_Path-instance_method" title="#reify_Path (instance method)">#<strong>reify_Path</strong>(obj, flist)  &#x21d2; TAGF::Mixin::Element </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Replace abstracted fields in <code>obj</code> (<em>i.e.</em>, those containing an EID rather than an object reference) with the appropriate values.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#symbolise_kwargs-instance_method" title="#symbolise_kwargs (instance method)">#<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; Hash&lt;Symbol=&gt;Any&gt; </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#symbolise_kwargs-instance_method" title="TAGF::Mixin::UniversalMethods#symbolise_kwargs (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Translate a hash into one with all-symbolic keys, according to standard <code>**kwargs</code> semantics.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#truthify-instance_method" title="#truthify (instance method)">#<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="Mixin/UniversalMethods.html#truthify-instance_method" title="TAGF::Mixin::UniversalMethods#truthify (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Convert a value (string, numeric, any kind of object) into a Boolean.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#version-instance_method" title="#version (instance method)">#<strong>version</strong>  &#x21d2; Versionomy </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../TAGF.html#version-instance_method" title="TAGF#version (method)">TAGF</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the <a href="http://rubygems.org/gems/versionomy" target="_parent" title="Versionomy">Versionomy</a> representation of the package version number.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="private ">
+  <span class="summary_signature">
+    
+      <a href="#VERSION-instance_method" title="#VERSION (instance method)">#<strong>VERSION</strong>  &#x21d2; String </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      included
+      from <span class='object_link'><a href="../TAGF.html#VERSION-instance_method" title="TAGF#VERSION (method)">TAGF</a></span>
+    </span>
+  
+  
+  
+  <span class="note title private">private</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the package version number as a string.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="elements-instance_method">
+  
+    #<strong>elements</strong>  &#x21d2; <tt>Hash&lt;String=&gt;<span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span>&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A hash of the game element objects created by the #load_game
+method, keyed by their EIDs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;String=&gt;<span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_elements'>elements</span>
+  <span class='ivar'>@elements</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="elements_processed-instance_method">
+  
+    #<strong>elements_processed</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>A hash of</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_elements_processed'>elements_processed</span>
+  <span class='ivar'>@elements_processed</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="elkey=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="elkey-instance_method">
+  
+    #<strong>elkey</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/ClassMethods.html#elkey-instance_method" title="TAGF::Mixin::ClassMethods#elkey (method)">Mixin::ClassMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Name of the element key as used in definition (YAML) files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="game-instance_method">
+  
+    #<strong>game</strong>  &#x21d2; <tt><span class='object_link'><a href="Game.html" title="TAGF::Game (class)">TAGF::Game</a></span></tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stores the TAGF::Game object that is being [re]loaded, for use
+elsewhere in the process.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Game.html" title="TAGF::Game (class)">TAGF::Game</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the game object created from the <code>YAML</code> dataset.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_game'>game</span>
+  <span class='ivar'>@game</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="klassname-instance_method">
+  
+    #<strong>klassname</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#klassname-instance_method" title="TAGF::Mixin::UniversalMethods#klassname (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return the receiver's classname as a string, with all
+namespacing elements removed so it's just the unqualified
+portion.  <em>E.g.</em>, an invocation by an object of class
+<code>TAGF::Exceptions::DummyError</code> would return <code>DummyError</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="sources-instance_method">
+  
+    #<strong>sources</strong>  &#x21d2; <tt>Array&lt;String&gt;</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Absolute paths to the <code>YAML</code> files associated with this load
+sequence.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Array of fully-qualified (absolute) path to <code>YAML</code> files from
+which definitions are read.  The first element is the main
+file passed to #load_game; any subsequent entries come from
+<code>include</code> or <code>includes</code> keys in the first file.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sources'>sources</span>
+  <span class='ivar'>@sources</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="yamldata-instance_method">
+  
+    #<strong>yamldata</strong>  &#x21d2; <tt>Hash</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Results of parsing the <code>YAML</code>-formatted data read from
+<code>#sources</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Ruby Hash data structure representing the information
+read from the source files.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#sources-instance_method" title="TAGF::Filer#sources (method)">#sources</a></span></li>
+    
+      <li><span class='object_link'><a href="#load_game-instance_method" title="TAGF::Filer#load_game (method)">#load_game</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 121</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_yamldata'>yamldata</span>
+  <span class='ivar'>@yamldata</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="_inivaluate_args-instance_method">
+  
+    #<strong>_inivaluate_args</strong>(default = nil, *args, **kwargs) {|inival| ... } &#x21d2; <tt>Hash{Symbol=&gt;Any}</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#_inivaluate_args-instance_method" title="TAGF::Mixin::UniversalMethods#_inivaluate_args (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(nil)
+Whatever default value should be supplied for attributes
+listed in the <code>args</code> array.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) array of attribute identifiers.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>(Possibly empty) hash of <em>keysym:inival</em> tuples.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Yields:</p>
+<ul class="yield">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>inival</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>allows an attribute declarator to perform validity checks or
+transformations on the initial values (such as ensuring they
+are all of a particular class (<em>e.g.</em>, <code>TrueClass</code> or
+<code>FalseClass</code> for a Boolean attribute).</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Parameters:</p>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='name'>inival</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>each <em>inival</em> in turn.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Yield Returns:</p>
+<ul class="yieldreturn">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever tranformation, if any, the block performs on the
+<em>inival</em>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash{Symbol=&gt;Any}</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a hash of <em>keysym:inival</em> tuples built from merging
+the <em>kwargs</em> hash onto the one constructed from the
+<em>args</em> array and the <em>default</em> value.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="debugging?-instance_method">
+  
+    #<strong>debugging?</strong>(item)  &#x21d2; <tt>Boolean</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../TAGF.html#debugging%3F-instance_method" title="TAGF#debugging? (method)">TAGF</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Dummy method for debugging before any real methods are defined.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>([])
+Dummy argument.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>({})
+Dummy hash of keyword arguments.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>false</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="decompose_attrib-instance_method">
+  
+    #<strong>decompose_attrib</strong>(attrib_p, default = nil)  &#x21d2; <tt>OpenStruct</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#decompose_attrib-instance_method" title="TAGF::Mixin::UniversalMethods#decompose_attrib (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Given a symbolic attribute name and potentially a default
+value, return a structure containing fields for the various
+things needed to define methods dealing with it
+(String name, instance-variable symbol, attribute with
+suffices like <code>!</code>, <code>?</code>, <code>=</code>).  Any non-alphanumeric,
+non-underscore characters are silently stripped before the
+name is processed.</p>
+
+<p>See the return value for details of the returned structure.</p>
+
+<pre class="code ruby"><code class="ruby">    default:    The default value from this method invocation;
+                default `nil`
+    str:        The base attribute name as a String
+    attrib:     The base attribute name as a Symbol
+    getter:     (Same as :attrib field)
+    setter:     The symbolic attribute name with a `=` suffix
+    query:      The symbolic attribute name with a `?` suffix
+    bang:       The symbolic attribute name with a `!` suffix
+    ivar:       The symbolic name for the corresponding
+                instance variable (_e.g._, `:@&lt;attrib_p&gt;`)
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attrib_p</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>default</span>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>OpenStruct</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Fields in the structure are:</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="game_options?-instance_method">
+  
+    #<strong>game_options?</strong>(option, *args)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#game_options%3F-instance_method" title="TAGF::Mixin::UniversalMethods#game_options? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Check to see whether one or more game options are currently
+enabled.  If any arguments aren't recognised as game options,
+a warning is sent to <code>stderr</code> and that argument is ignored.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>option</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;Symbol&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>true</code> if <strong>all</strong> of the requested options are currently
+enabled.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="invocation-instance_method">
+  
+    #<strong>invocation</strong>(altmethod = nil, altmessage = nil, frame = 1)  &#x21d2; <tt>void</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/Debugging.html#invocation-instance_method" title="TAGF::Mixin::Debugging#invocation (method)">Mixin::Debugging</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p><p>Display a method on <code>stderr</code> about a particular method or
+class of method beginning execution.  By default, the method
+described is the one that invoked #invocation, but this
+can be overridden by passing an actual method symbol (such as
+<code>:initialize</code>).</p>
+
+<p>The format of the message written to <code>stderr</code> is:</p>
+
+<p>   &lt;1>[2].3 invocation beginning</p>
+
+<p>where</p>
+
+<h1>. is the name of the class or module in which the method</h1>
+
+<p>   resides</p>
+
+<h1>. is the EID (element ID) of the object in which the</h1>
+
+<p>   method is being invoked, and</p>
+
+<h1>. is the name of the method itself.</h1>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>altmethod</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(nil)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>altmessage</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>nil</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(nil)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>frame</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(1)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_game_element?-instance_method">
+  
+    #<strong>is_game_element?</strong>(target)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#is_game_element%3F-instance_method" title="TAGF::Mixin::UniversalMethods#is_game_element? (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Return <code>true</code> if the given object is a game element — that is,
+its eigenclass has included (or been extended by) the
+TAGF::Mixin::Element module.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>target</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_game-instance_method">
+  
+    #<strong>load_game</strong>(file)  &#x21d2; <tt><span class='object_link'><a href="Game.html" title="TAGF::Game (class)">TAGF::Game</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Primary method for loading a game from its original
+definition, or a saved game.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Filesystem path to the <code>YAML</code> file from which to load
+definitions.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Game.html" title="TAGF::Game (class)">TAGF::Game</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the game object, which is the root of all objects comprising
+the game environment.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/DataError.html" title="TAGF::Exceptions::DataError (class)">TAGF::Exceptions::DataError</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if <code>YAML.load</code> raised an exception parsing the source.  The
+parsing exception message is included in the message.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/DataError.html" title="TAGF::Exceptions::DataError (class)">TAGF::Exceptions::DataError</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>'…no "game" key found'</code>
+if the <code>YAML</code> file doesn't have a top-level <code>"game"</code> key.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/DataError.html" title="TAGF::Exceptions::DataError (class)">TAGF::Exceptions::DataError</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><tt>'…unknown game element "<em>YAML-key</em>"'</tt>
+if a top-level key is found in the <code>YAML</code> file which is
+<strong>not</em> in the <span class='object_link'><a href="#Loadables-constant" title="TAGF::Filer::Loadables (constant)">Loadables</a></span> keyword list.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 547</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_load_game'>load_game</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&#39;%s: %s(%s)&#39;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              file))
+</span><span class='embdoc_end'>=end
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Invoking this method discards anything from any previous
+</span>  <span class='comment'># invocation, starting a new game context.
+</span>  <span class='comment'>#
+</span>  <span class='ivar'>@game</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@elements</span>		<span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@elements_processed</span><span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@yamldata</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@sources</span>		<span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Figure out the full path to the primary source file.  Makes
+</span>  <span class='comment'># reporting problems less fraught with &quot;what the hell?&quot;
+</span>  <span class='comment'># moments.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_fname'>fname</span>		<span class='op'>=</span> <span class='const'>Pathname</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span>
+  <span class='ivar'>@sources</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_absolute_path'>absolute_path</span><span class='lparen'>(</span><span class='id identifier rubyid_fname'>fname</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Time to load the doughnuts..  instance variable `@yamldata`
+</span>  <span class='comment'># will hold the parsed data.  Local variable `ydata` will hold
+</span>  <span class='comment'># a copy, which will be edited to remove processed definitions
+</span>  <span class='comment'># as we walk through it.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_fdata'>fdata</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sources'>sources</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>r</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fio'>fio</span><span class='op'>|</span>
+    <span class='id identifier rubyid_fdata'>fdata</span>		<span class='op'>=</span> <span class='id identifier rubyid_fio'>fio</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># This weird stuff is because raising an exception in a rescue
+</span>  <span class='comment'># block automatically attaches the original exception in the
+</span>  <span class='comment'># #cause attribute, which makes the output really messy and
+</span>  <span class='comment'># confusing.  All we want is the basic parse error, so we make
+</span>  <span class='comment'># it available outside the begin/end block so it won&#39;t be
+</span>  <span class='comment'># auto-attached.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_parse_exc'>parse_exc</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>begin</span>
+    <span class='ivar'>@yamldata</span>	<span class='op'>=</span> <span class='const'>YAML</span><span class='period'>.</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='id identifier rubyid_fdata'>fdata</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span> <span class='const'>StandardError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_parse_exc'>parse_exc</span>
+    <span class='id identifier rubyid_debugger'>debugger</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Now, if there was a parse error, report it under our own
+</span>  <span class='comment'># exception.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_parse_exc'>parse_exc</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/DataError.html" title="TAGF::Exceptions::DataError (class)">DataError</a></span></span><span class='comma'>,</span>
+                    <span class='label'>source:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sources'>sources</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                    <span class='label'>error:</span>  <span class='id identifier rubyid_parse_exc'>parse_exc</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># We&#39;re good to go!
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_ydata'>ydata</span>		<span class='op'>=</span> <span class='ivar'>@yamldata</span><span class='period'>.</span><span class='id identifier rubyid_dup'>dup</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Here is where we (recursively?) process any
+</span>  <span class='comment'># `include`/`includes` keys in the YAML files.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_include_files'>include_files</span>	<span class='op'>=</span> <span class='lbracket'>[</span> <span class='id identifier rubyid_ydata'>ydata</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>include</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_ydata'>ydata</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>includes</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='rbracket'>]</span>
+  <span class='id identifier rubyid_include_files'>include_files</span>	<span class='op'>=</span> <span class='id identifier rubyid_include_files'>include_files</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='period'>.</span><span class='id identifier rubyid_uniq'>uniq</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Find the game definition, from which all else follows.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_gamedef'>gamedef</span>		<span class='op'>=</span> <span class='id identifier rubyid_ydata'>ydata</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>game</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_gamedef'>gamedef</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/DataError.html" title="TAGF::Exceptions::DataError (class)">DataError</a></span></span><span class='comma'>,</span>
+                    <span class='label'>source:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sources'>sources</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                    <span class='label'>error:</span>  <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no &quot;game&quot; key found</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># YAML keys are strings; convert them to symbols, since that&#39;s
+</span>  <span class='comment'># what we use internally.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_kwargs'>kwargs</span>		<span class='op'>=</span> <span class='id identifier rubyid_symbolise_kwargs'>symbolise_kwargs</span><span class='lparen'>(</span><span class='id identifier rubyid_gamedef'>gamedef</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&#39;%s: instantiating game [%s]&lt;%s&gt;&#39;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              kwargs[:eid].to_s,
+</span><span class='embdoc'>              kwargs[:name].to_s))
+</span><span class='embdoc_end'>=end
+</span>  <span class='ivar'>@game</span>		<span class='op'>=</span> <span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Game.html" title="TAGF::Game (class)">Game</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Game.html#initialize-instance_method" title="TAGF::Game#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='comma'>,</span>
+                                     <span class='label'>loadfile:</span> <span class='ivar'>@sources</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements_processed'>elements_processed</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_gamedef'>gamedef</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='lbracket'>[</span><span class='ivar'>@game</span><span class='period'>.</span><span class='id identifier rubyid_eid'>eid</span><span class='rbracket'>]</span><span class='op'>=</span> <span class='ivar'>@game</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Now do the rest..
+</span>  <span class='comment'>#
+</span>  <span class='kw'>while</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_defkey'>defkey</span><span class='comma'>,</span><span class='id identifier rubyid_defobj'>defobj</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_ydata'>ydata</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_etype'>etype</span>		<span class='op'>=</span> <span class='const'><span class='object_link'><a href="#Loadables-constant" title="TAGF::Filer::Loadables (constant)">Loadables</a></span></span><span class='lbracket'>[</span><span class='id identifier rubyid_defkey'>defkey</span><span class='rbracket'>]</span>
+<span class='comment'>#        debugger if (%w[ factions locations ].include?(defkey))
+</span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="Exceptions/DataError.html" title="TAGF::Exceptions::DataError (class)">DataError</a></span></span><span class='comma'>,</span>
+                      <span class='label'>source:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_sources'>sources</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                      <span class='label'>error:</span>  <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>unknown game element &quot;%s&quot;</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                                     <span class='id identifier rubyid_defkey'>defkey</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='comment'>#
+</span>    <span class='comment'># `etype` might be a class, an array, or a hash.  If an
+</span>    <span class='comment'># array, `etype.first` describes how each element of the
+</span>    <span class='comment'># array should be handled.  If `etype` is a hash.. well, it
+</span>    <span class='comment'># gets handled specially.
+</span>    <span class='comment'>#
+</span>    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> \
+        <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_defobj'>defobj</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> \
+        <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_defobj'>defobj</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># Got a keyword that takes an array, but the array of
+</span>      <span class='comment'># definitions is empty.  Skip by doing nothing and advancing
+</span>      <span class='comment'># to the next key in the `ydata` hash.
+</span>      <span class='comment'>#
+</span>      <span class='kw'>nil</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Class</span><span class='rparen'>)</span> \
+           <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_defobj'>defobj</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># A singleton instance definition.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_klass'>klass</span>		<span class='op'>=</span> <span class='id identifier rubyid_etype'>etype</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>      warn(format(&#39;loading: element is an instance of %s&#39;,
+</span><span class='embdoc'>                  klass.name))
+</span><span class='embdoc_end'>=end
+</span>      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_definition'>process_definition</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_defobj'>defobj</span><span class='rparen'>)</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> \
+           <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_defobj'>defobj</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span> \
+           <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_defobj'>defobj</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='comment'>#
+</span>      <span class='comment'># An array of instance definition hashes for class
+</span>      <span class='comment'># `etype[0]`.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_klass'>klass</span>		<span class='op'>=</span> <span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>      warn(format(&#39;loading: element is an array of %s&#39;,
+</span><span class='embdoc'>                  klass.to_s))
+</span><span class='embdoc_end'>=end
+</span>      <span class='comment'>#
+</span>      <span class='comment'># Loop through the array of definitions, instantiating
+</span>      <span class='comment'># each in turn.
+</span>      <span class='comment'>#
+</span>      <span class='id identifier rubyid_defobj'>defobj</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_elt'>elt</span><span class='op'>|</span>
+        <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_process_definition'>process_definition</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_elt'>elt</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>Hash</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s: skipping element &quot;%s&quot;: Hash: %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                  <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+                  <span class='id identifier rubyid_defkey'>defkey</span><span class='comma'>,</span>
+                  <span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_warn'>warn</span><span class='lparen'>(</span><span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>%s: skipping element &quot;%s&quot;: UNKNOWN: %s =&gt; %s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                  <span class='id identifier rubyid___callee__'>__callee__</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+                  <span class='id identifier rubyid_defkey'>defkey</span><span class='comma'>,</span>
+                  <span class='id identifier rubyid_etype'>etype</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span><span class='comma'>,</span>
+                  <span class='id identifier rubyid_defobj'>defobj</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='comment'>#
+</span>    <span class='comment'># We&#39;re done with this definition; remove it from the hash of
+</span>    <span class='comment'># objects to do.  `ydata` is a hash, so we have to use #delete
+</span>    <span class='comment'># rather than #shift.
+</span>    <span class='comment'>#
+</span>    <span class='id identifier rubyid_ydata'>ydata</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_defkey'>defkey</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>                       <span class='comment'># while ((defkey,defobj) = ydata.first)
+</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Now go through the elements we created and replace any string
+</span>  <span class='comment'># EIDs with the objects, as described by the result from
+</span>  <span class='comment'># #abstracted_fields for each object.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_reify_elements'>reify_elements</span>
+  <span class='kw'>return</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_generic-instance_method">
+  
+    #<strong>load_generic</strong>(klass, ekwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a game element from a class identifier and a set of
+keyword arguments.  This works for most TAGF objects, but some
+(like Game itself) require special handling.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Class used to construct the object.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ekwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of keyword arguments appropriate to the <code>klass</code>
+constructor.  Keys may be either Symbols (as is usual kwargs
+semantics) or Strings.  It is converted to having all-Symbol
+keys in order to pass it to the constructor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the constructed object of class <code>klass</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_load_generic'>load_generic</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span>		<span class='op'>=</span> <span class='id identifier rubyid_symbolise_kwargs'>symbolise_kwargs</span><span class='lparen'>(</span><span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&quot;%s: %s(%s,\n  %s&quot;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              klass.klassname,
+</span><span class='embdoc'>              PP.pp(kwargs, String.new).gsub(%r!\n!, &quot;\n  &quot;)))
+</span><span class='embdoc_end'>=end
+</span>  <span class='id identifier rubyid_eid'>eid</span>		<span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:eid</span><span class='rbracket'>]</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/DuplicateObject.html" title="TAGF::Exceptions::DuplicateObject (class)">DuplicateObject</a></span></span><span class='comma'>,</span>
+                    <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+                    <span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># If there&#39;s no :game keyword, or it&#39;s a string (EID) and
+</span>  <span class='comment'># matches our current game context, put the latter into the
+</span>  <span class='comment'># `kwargs` hash as a cheat/shortcut.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:game</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> \
+      <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:game</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:game</span><span class='rbracket'>]</span>	<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Similarly, if there&#39;s no :owned_by keyword, or it&#39;s a string
+</span>  <span class='comment'># and matches the game&#39;s EID, force the game object into that
+</span>  <span class='comment'># slot in the kwargs hash.  In other words, any object that
+</span>  <span class='comment'># doesn&#39;t have an explicit owner gets assigned to the game
+</span>  <span class='comment'># object.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:owned_by</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> \
+      <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:owned_by</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:owned_by</span><span class='rbracket'>]</span><span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Okey, call Emmett to do the construction.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_result'>result</span>		<span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_result'>result</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="load_Location-instance_method">
+  
+    #<strong>load_Location</strong>(klass, ekwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a Location object from a set of keyword arguments.  This
+type of object requires additional special handling for
+abstracted fields which aren't simply EID strings.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Class used to construct the object.  Ignored.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ekwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of keyword arguments appropriate to the <code>klass</code>
+constructor.  Keys may be either Symbols (as is usual kwargs
+semantics) or Strings.  It is converted to having all-Symbol
+keys in order to pass it to the constructor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the constructed Location object.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 193</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_load_Location'>load_Location</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_kwargs'>kwargs</span>		<span class='op'>=</span> <span class='id identifier rubyid_symbolise_kwargs'>symbolise_kwargs</span><span class='lparen'>(</span><span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&quot;%s: %s(%s,\n  %s&quot;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              klass.klassname,
+</span><span class='embdoc'>              PP.pp(kwargs, String.new).gsub(%r!\n!, &quot;\n  &quot;)))
+</span><span class='embdoc_end'>=end
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Call the generic loader to handle the normal scalar EID string
+</span>  <span class='comment'># abstractions.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_obj'>obj</span>		<span class='op'>=</span> <span class='id identifier rubyid_load_generic'>load_generic</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Now do any :paths we were passed.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='id identifier rubyid_paths'>paths</span> <span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:paths</span><span class='rbracket'>]</span><span class='rparen'>)</span> \
+      <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_paths'>paths</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:@paths</span><span class='comma'>,</span> <span class='id identifier rubyid_paths'>paths</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_obj'>obj</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="loadable_fields-instance_method">
+  
+    
+      <span class="overload">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+      <span class="overload">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+    
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='abstracted_fields-instance_method'>abstracted_fields</span></span>
+    </span>
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#loadable_fields-instance_method" title="TAGF::Mixin::UniversalMethods#loadable_fields (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>loadable_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Look at the constant <code>Loadable_Fields</code> for the receiver
+class and all of its ancestors, and return an array of all
+unique values therein.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">#<strong>abstracted_fields</strong>(rcvr = nil)  &#x21d2; <tt>Array&lt;String&gt;</tt> </span>
+        <div class="docstring">
+  <div class="discussion">
+    <p>Same as #loadable_fields save that it uses the
+<code>Abstracted_Fields</code> constants instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+      </li>
+    
+  </ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>rcvr</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>(self)
+Class (or object whose class should be used) for which the
+list of fields should be derived.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a list of field names built from concatenating values of
+the constant from the receiver class and all of its
+ancestors.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pluralise-instance_method">
+  
+    #<strong>pluralise</strong>(word, number = 1)  &#x21d2; <tt>String</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#pluralise-instance_method" title="TAGF::Mixin::UniversalMethods#pluralise (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'><p>At the moment, only English (<code>en</code>) words are supported.</p>
+</div>
+  </div>
+
+<p>Given a word (presumably a singular noun) and a count, return
+the plural of the word if the count justifies it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>word</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>number</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>either the original word, or the deduced plural if the
+<code>number</code> argument was an integer 1.  (Floats <em>always</em>
+use plurals, even if they're <code>1.000</code>.)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="process_definition-instance_method">
+  
+    #<strong>process_definition</strong>(klass, ekwargs)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Create a game element from a class identifier and a set of
+keyword arguments.  This works for most TAGF objects, but some
+(like Game itself) require special handling.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>klass</span>
+      
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Class used to construct the object.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ekwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of keyword arguments appropriate to the <code>klass</code>
+constructor.  Keys may be either Symbols (as is usual kwargs
+semantics) or Strings.  It is converted to having all-Symbol
+keys in order to pass it to the constructor.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the constructed object of class <code>klass</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>TAGF::Exceptions::NoElementId</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>"missing required :eid keyword argument for element
+creation"</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/DuplicateObject.html" title="TAGF::Exceptions::DuplicateObject (class)">TAGF::Exceptions::DuplicateObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>EID of element definition matches one that has already been
+processed by the loader.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 237</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_process_definition'>process_definition</span><span class='lparen'>(</span><span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&#39;%s: instantiating a %s&#39;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              klass.name))
+</span><span class='embdoc_end'>=end
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Turn a hash that might have String keys into one with Symbol
+</span>  <span class='comment'># keys so we can use `kwargs` semantics.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_kwargs'>kwargs</span>		<span class='op'>=</span> <span class='id identifier rubyid_symbolise_kwargs'>symbolise_kwargs</span><span class='lparen'>(</span><span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_eid'>eid</span>		<span class='op'>=</span> <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:eid</span><span class='rbracket'>]</span>
+  <span class='kw'>unless</span> <span class='lparen'>(</span><span class='id identifier rubyid_eid'>eid</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/NoElementID.html" title="TAGF::Exceptions::NoElementID (class)">NoElementID</a></span></span><span class='comma'>,</span>
+                    <span class='label'>levels:</span> <span class='int'>2</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># See if any EID in the specification matches one we&#39;ve
+</span>  <span class='comment'># already processed.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='period'>.</span><span class='id identifier rubyid_has_key?'>has_key?</span><span class='lparen'>(</span><span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/DuplicateObject.html" title="TAGF::Exceptions::DuplicateObject (class)">DuplicateObject</a></span></span><span class='comma'>,</span>
+                    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='lbracket'>[</span><span class='id identifier rubyid_eid'>eid</span><span class='rbracket'>]</span><span class='comma'>,</span>
+                    <span class='label'>levels:</span> <span class='int'>2</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># If there&#39;s no :game keyword, or it&#39;s a string (EID) and
+</span>  <span class='comment'># matches our current game context, put the latter into the
+</span>  <span class='comment'># `kwargs` hash as a cheat/shortcut.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:game</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> \
+      <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:game</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:game</span><span class='rbracket'>]</span>	<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Similarly, if there&#39;s no :owned_by keyword, or it&#39;s a string
+</span>  <span class='comment'># and matches the game&#39;s EID, force the game object into that
+</span>  <span class='comment'># slot in the kwargs hash.  In other words, any object that
+</span>  <span class='comment'># doesn&#39;t have an explicit owner gets assigned to the game
+</span>  <span class='comment'># object.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:owned_by</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> \
+      <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:owned_by</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span><span class='period'>.</span><span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_kwargs'>kwargs</span><span class='lbracket'>[</span><span class='symbol'>:owned_by</span><span class='rbracket'>]</span><span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>#
+</span>  <span class='comment'># Figure out how to create the object.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_klassname'>klassname</span>		<span class='op'>=</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_klassname'>klassname</span>
+  <span class='id identifier rubyid_loader'>loader</span>		<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>load_%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_klassname'>klassname</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+  <span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_loader'>loader</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_loader'>loader</span>		<span class='op'>=</span> <span class='symbol'>:load_generic</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#
+</span>  <span class='comment'># Okey, do it and record our success.  Save the object we
+</span>  <span class='comment'># created in the #elements hash (keyed by EID) and the
+</span>  <span class='comment'># definition we used in the #elements_processed array (pushed
+</span>  <span class='comment'># on the end).
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_obj'>obj</span>		<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_loader'>loader</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='comma'>,</span> <span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements_processed'>elements_processed</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_ekwargs'>ekwargs</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='lbracket'>[</span><span class='id identifier rubyid_eid'>eid</span><span class='rbracket'>]</span><span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_obj'>obj</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="raise_exception-instance_method">
+  
+    #<strong>raise_exception</strong>(exc_object, *args, **kwargs)  &#x21d2; <tt>void</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#raise_exception-instance_method" title="TAGF::Mixin::UniversalMethods#raise_exception (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p class="note returns_void">This method returns an undefined value.</p><p>Either uses a passed exception or creates a new exception
+object according to the <code>exc_object</code> parameter, edits the
+backtrace to remove the appropriate number of stack frames,
+and raises it.</p>
+
+<p>Acceptable values for <code>exc_object</code> are any of the following:</p>
+
+<dl>
+<dt>1. a string</dt>
+<dd>a new <code>RuntimeError</code> exception is created from the
+ string.  <code>args</code> is ignored.</dd>
+<dt>2. an exception object</dt>
+<dd>the object is raised as is.  <code>args</code> is ignored.</dd>
+<dt>3. an exception class</dt>
+<dd>a new exception object is created from this constructor.
+ <code>args</code> is passed to the constructor, and <code>kwargs</code> as well
+ if <code>exc_object</code> is a descendant of
+ <span class='object_link'><a href="Exceptions/ErrorBase.html" title="TAGF::Exceptions::ErrorBase (class)">Exceptions::ErrorBase</a></span>.</dd>
+<dt>4. a callable object that returns one of the above</dt>
+<dd>anything that responds to the <code>:call</code> method falls into
+ this category.  It will be invoked with <code>.call(*args)</code>.
+ <code>kwargs</code> isn't passed.</dd>
+</dl>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>exc_object</span>
+      
+      
+        <span class='type'>(<tt>String</tt>, <tt>Class</tt>, <tt>Exception</tt>, <tt>Proc</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A string (converted to a <code>RuntimeError</code> exception), an
+exception class, an actual exception, or a <code>Proc</code> that
+returns one of the above.  See the method description.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>args</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>List of arguments to pass to any exception constructor
+invoked.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Hash of keyword arguments to pass to the constructor,
+possibly with the <code>:levels</code> keyword which will be consumed
+by this method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:levels</span>
+          <span class="type">(<tt>Integer</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>1</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>The number of stack frames to pop off the backtrace.  The
+default is 1, meaning that the caller's caller will appear
+to be the location raising the exception.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/NotExceptional.html" title="TAGF::Exceptions::NotExceptional (class)">TAGF::Exceptions::NotExceptional</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>NotExceptional</code> exception is if the argument wasn't a
+string, an exception instance, an exception class, or a proc
+that (eventually) returns an exception class or instance.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Any</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>whatever valid exception was derived from the arguments.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reify_elements-instance_method">
+  
+    #<strong>reify_elements</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Go through the game element objects in #elements and fill in
+abstracted fields containing EIDs with references to the actual
+objects.  If there is an element-specific reifier method, invoke
+that after calling the one that handles the usual EID
+abstractions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 482</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reify_elements'>reify_elements</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&#39;%s: beginning&#39;,
+</span><span class='embdoc'>              __callee__.to_s))
+</span><span class='embdoc_end'>=end
+</span>  <span class='id identifier rubyid_elist'>elist</span>		<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span><span class='id identifier rubyid_b'>b</span><span class='op'>|</span>
+    <span class='id identifier rubyid_a'>a</span><span class='period'>.</span><span class='id identifier rubyid_to_key'>to_key</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_to_key'>to_key</span>
+  <span class='rbrace'>}</span>
+  <span class='id identifier rubyid_etype'>etype</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='comment'>#
+</span>  <span class='comment'># @todo
+</span>  <span class='comment'>#   This section does a lot of unnecessary repetition; abstract
+</span>  <span class='comment'>#   it out.
+</span>  <span class='comment'># @todo
+</span>  <span class='comment'>#   Raise an exception if there&#39;s no object matching the EID
+</span>  <span class='comment'>#   string in any of the abstracted fields.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_absfields'>absfields</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_reifier'>reifier</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_elist'>elist</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span>
+    <span class='id identifier rubyid_ahash'>ahash</span>		<span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_abstracted_fields'>abstracted_fields</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span> <span class='op'>!=</span> <span class='id identifier rubyid_etype'>etype</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_absfields'>absfields</span>	<span class='op'>=</span> <span class='id identifier rubyid_ahash'>ahash</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_inject'>inject</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_memo'>memo</span><span class='comma'>,</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+        <span class='id identifier rubyid_memo'>memo</span><span class='lbracket'>[</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span><span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>@%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+        <span class='id identifier rubyid_memo'>memo</span>
+      <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_reifier'>reifier</span>	<span class='op'>=</span> <span class='id identifier rubyid_format'>format</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>reify_%s</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_klassname'>klassname</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span>
+      <span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_reifier'>reifier</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_reifier'>reifier</span>	<span class='op'>=</span> <span class='kw'>nil</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_etype'>etype</span>		<span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+    <span class='kw'>end</span>
+    <span class='comment'>#
+</span>    <span class='comment'># Do the EIDs, since *we* know how.
+</span>    <span class='comment'>#
+</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_reify_generic'>reify_generic</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span> <span class='id identifier rubyid_absfields'>absfields</span><span class='rparen'>)</span>
+    <span class='comment'>#
+</span>    <span class='comment'># If there are element-specific abstractions to reify, call
+</span>    <span class='comment'># the appropriate method.
+</span>    <span class='comment'>#
+</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_reifier'>reifier</span><span class='comma'>,</span> <span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span> <span class='id identifier rubyid_absfields'>absfields</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_reifier'>reifier</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>                       <span class='comment'># self.elements.each do
+</span>  <span class='kw'>return</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reify_generic-instance_method">
+  
+    #<strong>reify_generic</strong>(obj, flist)  &#x21d2; <tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Replace abstracted fields in <code>obj</code> (<em>i.e.</em>, those
+containing an EID rather than an object reference) with the
+appropriate values.  Fields are set with <code>instance_variable_set</code>
+in order to avoid any unknown side-effects.</p>
+
+<p>This method should work for most types of game element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The game element to have its abstracted attributes reified.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flist</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of abstracted field symbols and the corresponding
+instance-variable symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the original element with all known abstractions replaced.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/MemberNotFound.html" title="TAGF::Exceptions::MemberNotFound (class)">TAGF::Exceptions::MemberNotFound</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 319</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reify_generic'>reify_generic</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span> <span class='id identifier rubyid_flist'>flist</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&quot;%s: %s(%s,\n  %s)&quot;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              obj.to_key,
+</span><span class='embdoc'>              PP.pp(flist, String.new).gsub(%r!\n!, &quot;\n  &quot;)))
+</span><span class='embdoc_end'>=end
+</span>  <span class='id identifier rubyid_ahash'>ahash</span>		<span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_abstracted_fields'>abstracted_fields</span>
+  <span class='id identifier rubyid_flist'>flist</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fgetter'>fgetter</span><span class='comma'>,</span><span class='id identifier rubyid_fivar'>fivar</span><span class='op'>|</span>
+    <span class='id identifier rubyid_ftype'>ftype</span>		<span class='op'>=</span> <span class='id identifier rubyid_ahash'>ahash</span><span class='lbracket'>[</span><span class='id identifier rubyid_fgetter'>fgetter</span><span class='rbracket'>]</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_ftype'>ftype</span> <span class='op'>!=</span> <span class='const'>EID</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>      warn(format(&#39;%s: abstract field %s of object %s &#39; \
+</span><span class='embdoc'>                  + &#39;is not an EID; needs refining&#39;,
+</span><span class='embdoc'>                  __callee__.to_s,
+</span><span class='embdoc'>                  fgetter.inspect,
+</span><span class='embdoc'>                  obj.to_key))
+</span><span class='embdoc_end'>=end
+</span>      <span class='kw'>next</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_fval'>fval</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_getter_exc'>getter_exc</span>	<span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='kw'>begin</span>
+      <span class='id identifier rubyid_fval'>fval</span>		<span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_fgetter'>fgetter</span><span class='rparen'>)</span>
+    <span class='kw'>rescue</span> <span class='const'>NoMethodError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_getter_exc'>getter_exc</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_getter_exc'>getter_exc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/UnknownAttribute.html" title="TAGF::Exceptions::UnknownAttribute (class)">UnknownAttribute</a></span></span><span class='comma'>,</span>
+                      <span class='label'>raiser:</span>  <span class='id identifier rubyid___callee__'>__callee__</span><span class='comma'>,</span>
+                      <span class='label'>field:</span>   <span class='id identifier rubyid_fgetter'>fgetter</span><span class='comma'>,</span>
+                      <span class='label'>element:</span> <span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_fval'>fval</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_reifobj'>reifobj</span>	<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='lbracket'>[</span><span class='id identifier rubyid_fval'>fval</span><span class='rbracket'>]</span>
+      <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_reifobj'>reifobj</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/MemberNotFound.html" title="TAGF::Exceptions::MemberNotFound (class)">MemberNotFound</a></span></span><span class='comma'>,</span>
+                        <span class='label'>element:</span>	<span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span>
+                        <span class='label'>member:</span>	<span class='id identifier rubyid_fval'>fval</span><span class='comma'>,</span>
+                        <span class='label'>field:</span>	<span class='id identifier rubyid_fgetter'>fgetter</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='id identifier rubyid_fivar'>fivar</span><span class='comma'>,</span> <span class='id identifier rubyid_reifobj'>reifobj</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>                       <span class='comment'># flist.each
+</span>  <span class='kw'>return</span> <span class='id identifier rubyid_obj'>obj</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reify_Location-instance_method">
+  
+    #<strong>reify_Location</strong>(obj, flist)  &#x21d2; <tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Replace abstracted fields in <code>obj</code> (<em>i.e.</em>, those
+containing an EID rather than an object reference) with the
+appropriate values.  Fields are set with <code>instance_variable_set</code>
+in order to avoid any unknown side-effects.</p>
+
+<p>This method should work for most types of game element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The game element to have its abstracted attributes reified.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flist</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of abstracted field symbols and the corresponding
+instance-variable symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the original element with all known abstractions replaced.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/MemberNotFound.html" title="TAGF::Exceptions::MemberNotFound (class)">TAGF::Exceptions::MemberNotFound</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 440</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reify_Location'>reify_Location</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span> <span class='id identifier rubyid_flist'>flist</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&quot;%s: %s(%s,\n  %s)&quot;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              obj.to_key,
+</span><span class='embdoc'>              PP.pp(flist, String.new).gsub(%r!\n!, &quot;\n  &quot;)))
+</span><span class='embdoc_end'>=end
+</span>  <span class='comment'>#
+</span>  <span class='comment'># We&#39;re reconsituting the paths to other locations.  It&#39;s an
+</span>  <span class='comment'># array rather than a scalar, which is why we have this
+</span>  <span class='comment'># Location-specific reification method.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_fgetter'>fgetter</span>		<span class='op'>=</span> <span class='symbol'>:paths</span>
+  <span class='id identifier rubyid_fivar'>fivar</span>		<span class='op'>=</span> <span class='id identifier rubyid_flist'>flist</span><span class='lbracket'>[</span><span class='id identifier rubyid_fgetter'>fgetter</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_vlist'>vlist</span>		<span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_fgetter'>fgetter</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_varray'>varray</span>		<span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_vlist'>vlist</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cxeid'>cxeid</span><span class='op'>|</span>
+    <span class='id identifier rubyid_cxobj'>cxobj</span>		<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='lbracket'>[</span><span class='id identifier rubyid_cxeid'>cxeid</span><span class='rbracket'>]</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_cxobj'>cxobj</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/MemberNotFound.html" title="TAGF::Exceptions::MemberNotFound (class)">MemberNotFound</a></span></span><span class='comma'>,</span>
+                      <span class='label'>element:</span>	<span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span>
+                      <span class='label'>member:</span>	<span class='id identifier rubyid_cxeid'>cxeid</span><span class='comma'>,</span>
+                      <span class='label'>field:</span>	<span class='id identifier rubyid_fgetter'>fgetter</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_varray'>varray</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_cxobj'>cxobj</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>                       <span class='comment'># vlist.each do
+</span>
+  <span class='comment'>#
+</span>  <span class='comment'># We&#39;ve restored what we can of the paths, so update the
+</span>  <span class='comment'># location&#39;s field and move on to the next field to reify.
+</span>  <span class='comment'>#
+</span>  <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='symbol'>:@paths</span><span class='comma'>,</span> <span class='id identifier rubyid_varray'>varray</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_obj'>obj</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reify_Path-instance_method">
+  
+    #<strong>reify_Path</strong>(obj, flist)  &#x21d2; <tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Replace abstracted fields in <code>obj</code> (<em>i.e.</em>, those
+containing an EID rather than an object reference) with the
+appropriate values.  Fields are set with <code>instance_variable_set</code>
+in order to avoid any unknown side-effects.</p>
+
+<p>This method should work for most types of game element.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>obj</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The game element to have its abstracted attributes reified.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flist</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Symbol&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A hash of abstracted field symbols and the corresponding
+instance-variable symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Mixin/Element.html" title="TAGF::Mixin::Element (module)">TAGF::Mixin::Element</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the original element with all known abstractions replaced.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/MemberNotFound.html" title="TAGF::Exceptions::MemberNotFound (class)">TAGF::Exceptions::MemberNotFound</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tagf/filer.rb', line 382</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reify_Path'>reify_Path</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span> <span class='id identifier rubyid_flist'>flist</span><span class='rparen'>)</span>
+<span class='embdoc_beg'>=begin
+</span><span class='embdoc'>  warn(format(&quot;%s: %s(%s,\n  %s)&quot;,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              __callee__.to_s,
+</span><span class='embdoc'>              obj.to_key,
+</span><span class='embdoc'>              PP.pp(flist, String.new).gsub(%r!\n!, &quot;\n  &quot;)))
+</span><span class='embdoc_end'>=end
+</span>  <span class='id identifier rubyid_flist'>flist</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fgetter'>fgetter</span><span class='comma'>,</span><span class='id identifier rubyid_fivar'>fivar</span><span class='op'>|</span>
+    <span class='id identifier rubyid_fval'>fval</span>		<span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='id identifier rubyid_getter_exc'>getter_exc</span>	<span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='kw'>begin</span>
+      <span class='id identifier rubyid_fval'>fval</span>		<span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_fgetter'>fgetter</span><span class='rparen'>)</span>
+    <span class='kw'>rescue</span> <span class='const'>NoMethodError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_getter_exc'>getter_exc</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span> <span class='id identifier rubyid_getter_exc'>getter_exc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/UnknownAttribute.html" title="TAGF::Exceptions::UnknownAttribute (class)">UnknownAttribute</a></span></span><span class='comma'>,</span>
+                      <span class='label'>field:</span>   <span class='id identifier rubyid_fgetter'>fgetter</span><span class='comma'>,</span>
+                      <span class='label'>element:</span> <span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_fval'>fval</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_reifobj'>reifobj</span>	<span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_elements'>elements</span><span class='lbracket'>[</span><span class='id identifier rubyid_fval'>fval</span><span class='rbracket'>]</span>
+      <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_reifobj'>reifobj</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_raise_exception'>raise_exception</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../TAGF.html" title="TAGF (module)">TAGF</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions.html" title="TAGF::Exceptions (module)">Exceptions</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Exceptions/MemberNotFound.html" title="TAGF::Exceptions::MemberNotFound (class)">MemberNotFound</a></span></span><span class='comma'>,</span>
+                        <span class='label'>raiser:</span>	<span class='id identifier rubyid___callee__'>__callee__</span><span class='comma'>,</span>
+                        <span class='label'>element:</span>	<span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span>
+                        <span class='label'>member:</span>	<span class='id identifier rubyid_fval'>fval</span><span class='comma'>,</span>
+                        <span class='label'>field:</span>	<span class='id identifier rubyid_fgetter'>fgetter</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='id identifier rubyid_fivar'>fivar</span><span class='comma'>,</span> <span class='id identifier rubyid_reifobj'>reifobj</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>                       <span class='comment'># flist.each
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Re-own Path objects from the game to the origin
+</span>  <span class='comment'># Location.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_owned_by'>owned_by</span> <span class='op'>==</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_game'>game</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_owned_by'>owned_by</span>	<span class='op'>=</span> <span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_origin'>origin</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_obj'>obj</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="symbolise_kwargs-instance_method">
+  
+    #<strong>symbolise_kwargs</strong>(kwargs)  &#x21d2; <tt>Hash&lt;Symbol=&gt;Any&gt;</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#symbolise_kwargs-instance_method" title="TAGF::Mixin::UniversalMethods#symbolise_kwargs (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Translate a hash into one with all-symbolic keys, according to
+standard <code>**kwargs</code> semantics.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol,String=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Any&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a copy of the <code>kwargs</code> argument with all keys converted to
+symbols.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>RuntimeError</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><tt>"symbolise_kwargs kwargs keys must be Symbols or
+Strings: <em>classname</em>:<em>key</em>"</tt></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="truthify-instance_method">
+  
+    #<strong>truthify</strong>(testvalue, **kwargs)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Mixin/UniversalMethods.html#truthify-instance_method" title="TAGF::Mixin::UniversalMethods#truthify (method)">Mixin::UniversalMethods</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Convert a value (string, numeric, any kind of object) into a
+Boolean.  This varies slightly from normal Ruby semantics in
+that an integer 0 is considered <code>false</code> whereas normal Ruby
+interpretation would consider it <code>true</code>.</p>
+
+<p>Any value which isn't represented in the list of truthy values
+is considered <code>false</code>.</p>
+
+<p>The default list of truthy values can be augmented or replaced
+by using the keyword arguments <code>:true_values</code> and <code>:replace</code>.
+See the option descriptions below.</p>
+
+<p>More involved checking can be performed by supplying a proc
+(which is what the default implementation uses).  This module
+supplies some possibly-useful string and Regexp constants.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>testvalue</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>value to evaluate for truthiness.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>kwargs</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Symbol=&gt;Object&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>**kwargs</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:true_values</span>
+          <span class="type">(<tt>Array</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>An array of objects that are the only ones that will be
+considered truthy.  <em>Any more involved checking than 'is
+it one of these?' should be handled with a truthiness
+proc.</em></p>
+
+<p>This is only meaningful if <code>:truthiness_proc</code> isn't used.</p>
+</div>
+          
+        </li>
+      
+        <li>
+          <span class="name">:truthiness_proc</span>
+          <span class="type">(<tt>Proc</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'><p>Proc to be called</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result of the evaluation.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Exceptions/UncallableObject.html" title="TAGF::Exceptions::UncallableObject (class)">TAGF::Exceptions::UncallableObject</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>if the <code>:truthiness_proc</code> argument doesn't respond to the
+<code>:call</code> method.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>Truthy_Test_Proc</li>
+    
+      <li><span class='object_link'><a href="Mixin/UniversalMethods.html#Truthy_Strings-constant" title="TAGF::Mixin::UniversalMethods::Truthy_Strings (constant)">Truthy_Strings</a></span></li>
+    
+      <li><span class='object_link'><a href="Mixin/UniversalMethods.html#Digit_String-constant" title="TAGF::Mixin::UniversalMethods::Digit_String (constant)">Digit_String</a></span></li>
+    
+      <li><span class='object_link'><a href="Mixin/UniversalMethods.html#Float_String-constant" title="TAGF::Mixin::UniversalMethods::Float_String (constant)">Float_String</a></span></li>
+    
+      <li><span class='object_link'><a href="Mixin/UniversalMethods.html#Complex_String-constant" title="TAGF::Mixin::UniversalMethods::Complex_String (constant)">Complex_String</a></span></li>
+    
+      <li><span class='object_link'><a href="Mixin/UniversalMethods.html#Integer_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Integer_String_RE (constant)">Integer_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="Mixin/UniversalMethods.html#Float_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Float_String_RE (constant)">Float_String_RE</a></span></li>
+    
+      <li><span class='object_link'><a href="Mixin/UniversalMethods.html#Complex_String_RE-constant" title="TAGF::Mixin::UniversalMethods::Complex_String_RE (constant)">Complex_String_RE</a></span></li>
+    
+  </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="version-instance_method">
+  
+    #<strong>version</strong>  &#x21d2; <tt>Versionomy</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../TAGF.html#version-instance_method" title="TAGF#version (method)">TAGF</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the <a href="http://rubygems.org/gems/versionomy" target="_parent" title="Versionomy">Versionomy</a>
+representation of the package version number.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Versionomy</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="VERSION-instance_method">
+  
+    #<strong>VERSION</strong>  &#x21d2; <tt>String</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="../TAGF.html#VERSION-instance_method" title="TAGF#VERSION (method)">TAGF</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the package version number as a string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Mar  1 15:35:32 2024 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.0.5).
+</div>
+
+    </div>
+  </body>
+</html>
